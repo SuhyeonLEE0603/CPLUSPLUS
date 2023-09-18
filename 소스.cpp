@@ -5,52 +5,32 @@
 //---------------------------------------------------------------------------
 
 #include <iostream>
-#include <random>			// 랜덤값과 분포를 사용하려면
+#include <random>
 #include <format>
-#include <algorithm>
 #include "save.h"
 using namespace std;
 
-default_random_engine dre;				// 랜덤값을 생성하는 엔진
-uniform_int_distribution uid{ 1, 999 };
+default_random_engine dre;
+uniform_int_distribution uid{ 1, 6 };
+
+// [문제] 주사위를 1'0000 번 던졌다. 각 숫자의 출현 횟수와 확률을 출력하라
+// 1 - 1670번, 확률 - 16.7%
+// ...
+
 
 //--------
 int main()
 //--------
 {
-	int numbers[1000];
+	int nums[6]{};
 
-	for (int i = 0; i < 1000; ++i) {
-		numbers[i] = uid(dre);
+	for (int i = 0; i < 1'0000; ++i) {
+		nums[uid(dre) - 1]++;
 	}
 
-	for (int num : numbers) {
-		cout << format("{:4d}", num);
+	for (int k = 0; k < 6; ++k) {
+		cout << k + 1 << " - " << nums[k] << "번, 확률 - " << format("{:2.1f}", nums[k] / 100.0) << "%" << endl;
 	}
-	cout << endl;
 
-	int max = numeric_limits<int>::min();
-	// [문제] 원하는 수를 하나 입력받아라
-	// 그 수가 numbers에 있는 지 없는 지 찾아 출력하라
-
-	int x;
-	while(true) {
-		cout << "원하는 수를 입력하시오" << endl;
-		cin >> x;
-
-		bool flag{ false };
-		for (int num : numbers) {
-			if (num == x) {
-				flag = true;
-				cout << "해당 수를 찾았습니다" << endl;
-				break;
-			}
-		}
-
-		if (not flag) {
-			cout << "해당 수를 못 찾았습니다" << endl;
-		}
-	}
-	
-	//save("소스.cpp");
+	save("소스.cpp");
 }

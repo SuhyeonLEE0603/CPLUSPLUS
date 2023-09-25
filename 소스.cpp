@@ -9,17 +9,19 @@
 #include "save.h"
 using namespace std;
 
+
 //--------
 int main()
 //--------
 {
-	const int NUM = 25'0000;
-	int num[NUM];				// 1MB = 1024KB = 1024 * 1024B
+	// [문제] 프로그램을 실행해서 STACK을 넘치게 하라
+	
+	static int n{};
 
-	cout << num[NUM- 1] << endl;
-	cout << addressof(num[NUM - 1]) << endl;
+	cout << n++;
+	cout << "안녕 나는 main이야" << endl;
 
-	// 오류가 나는 이유 : STACK 오버플로우가 발생하기 때문(STACK의 최대 크기 1MB)
+	main();
 
-	save("소스.cpp");
+	//save("소스.cpp");
 }

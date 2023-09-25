@@ -8,16 +8,25 @@
 #include "save.h"
 using namespace std;
 
-int n;				// DATA - global variable
+int gn[10];
 
 //--------
 int main()
 //--------
 {
-	int n;			// STACK - local variable
-					// DATA, STACK은 n이란 이름으로 주소값에 엑세스하여 그 안의 값을 다룸
+	int n[10];
 
-	new int;		// FREE Store - dynamically allocated variable -> DATA와 STACK이랑 다르게 주소값만 가지고 다룸
-	// -> system(Operating system)에 요청
+	int* p = new int[10];
+
+	// 각 int는 살고 있는 곳이 다르다
+
+	cout << addressof(n) << endl;
+	cout << addressof(gn) << endl;
+	cout << p << endl;
+
+	// STACK : n, p
+	// DATA : n
+	// Free Store : new int
+
 	save("소스.cpp");
 }

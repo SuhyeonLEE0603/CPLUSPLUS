@@ -8,11 +8,16 @@
 #include "save.h"
 using namespace std;
 
+int n;				// DATA - global variable
+
 //--------
 int main()
 //--------
 {
-	main();			// undefined-behavior
+	int n;			// STACK - local variable
+					// DATA, STACK은 n이란 이름으로 주소값에 엑세스하여 그 안의 값을 다룸
 
-	//save("소스.cpp");
+	new int;		// FREE Store - dynamically allocated variable -> DATA와 STACK이랑 다르게 주소값만 가지고 다룸
+	// -> system(Operating system)에 요청
+	save("소스.cpp");
 }

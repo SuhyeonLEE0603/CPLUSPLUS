@@ -538,7 +538,7 @@ int main()
 #include "save.h"
 using namespace std;
 
-void change(int*, int*);
+void change(int*, int*);		// function declaration : 선언
 
 //--------
 int main()
@@ -550,14 +550,51 @@ int main()
 	// 원하는 출력값이 예시와 같이 나오도록
 	// 함수 change를 선언하고 정의한 후 호출하라
 
-	change(&a, &b);
+	change(&a, &b);				// function call : 호출
 	cout << a << ", " << b << endl;		// 예시) 2, 1
 
 	save("소스.cpp");
 }
 
-void change(int* p, int* q) {
+void change(int* p, int* q) {	// function definition : 정의
 	int temp{ *p };
 	*p = *q;
 	*q = temp;
+}
+
+
+==================================================
+소스.cpp2023-09-27 수요일 오후 4:43:24
+==================================================
+// 2023. 9. 27 월										(4주 2일)
+// 10월 2일 (5주 1일) - 동영상 강의
+// 10월 25일(6주 2일) - 중간시험
+//---------------------------------------------------------------------------
+// change 함수
+//---------------------------------------------------------------------------
+// 정렬
+//---------------------------------------------------------------------------
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+void change(int&, int&);			// call-by reference
+
+//--------
+int main()
+//--------
+{
+	int a{ 1 }, b{ 2 };
+
+	change(a, b);
+
+	cout << a << ", " << b << endl;
+	save("소스.cpp");
+}
+
+void change(int& p, int& q) {
+	int temp{ p };
+	p = q;
+	q = temp;
 }

@@ -11,26 +11,22 @@
 #include "save.h"
 using namespace std;
 
-void change(int*, int*);
+void change(int&, int&);			// call-by reference
 
 //--------
 int main()
 //--------
 {
 	int a{ 1 }, b{ 2 };
-	
-	// 여기서 함수 change를 호출하여 a와 b의 값을 서로 바꾸는 코딩을 한다.
-	// 원하는 출력값이 예시와 같이 나오도록
-	// 함수 change를 선언하고 정의한 후 호출하라
 
-	change(&a, &b);
-	cout << a << ", " << b << endl;		// 예시) 2, 1
+	change(a, b);
 
+	cout << a << ", " << b << endl;
 	save("소스.cpp");
 }
 
-void change(int* p, int* q) {
-	int temp{ *p };
-	*p = *q;
-	*q = temp;
+void change(int& p, int& q) {
+	int temp{ p };
+	p = q;
+	q = temp;
 }

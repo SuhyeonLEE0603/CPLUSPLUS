@@ -17,14 +17,17 @@ void change(int&, int&);			// 선언과 정의를 반드시 나눠야함
 int main()
 //--------
 {
-	int num[]{ 10, 3, 8, 6, 1, 5, 2, 7, 4, 9 };
+	const int NUM = 10;
+	int num[NUM]{ 10, 3, 8, 6, 1, 5, 2, 7, 4, 9 };
 
 	// [문제] num에 있는 값 중 제일 큰 값을 오른쪽으로 옮겨라
-	int size = sizeof(num) / sizeof(int);
-
-	for (int i = 0; i < size - 1; ++i) {
-		if (num[i] > num[i + 1]) {
-			change(num[i], num[i + 1]);
+	
+	// buble sort
+	for (int k = 1; k < NUM - 2; ++k) {
+		for (int i = 0; i < NUM - k; ++i) {
+			if (num[i] > num[i + 1]) {
+				change(num[i], num[i + 1]);
+			}
 		}
 	}
 

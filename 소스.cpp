@@ -1,45 +1,48 @@
 // 2023. 10. 2 월										(5주 1일)
 // 10월 25일(8주 2일) - 중간시험
 //---------------------------------------------------------------------------
-// change 함수
-//---------------------------------------------------------------------------
-// 정렬
+// 정렬(sort)
 //---------------------------------------------------------------------------
 
 #include <iostream>
+#include <format>
+#include <random>
 #include "save.h"
 using namespace std;
 
-void change(int&, int&);			// 선언과 정의를 반드시 나눠야함
+default_random_engine dre;
+uniform_int_distribution uid{ 1, 999 };
+
+// [문제] int 값 1'000개를 저장할 수 있는 배열을 만들어라
+// 각 int값을 1부터 999까지 값 중 랜덤값으로 만들어라
+// 배열을 오름차순으로 정렬하라
+// 전체 1000개 값을 화면에 출력하라
 
 //--------
 int main()
 //--------
 {
-	const int NUM = 10;
-	int num[NUM]{ 10, 3, 8, 6, 1, 5, 2, 7, 4, 9 };
+	int num[1000];		// 4KB
 
-	// [문제] num에 있는 값 중 제일 큰 값을 오른쪽으로 옮겨라
-	
-	// buble sort
-	for (int k = 1; k < NUM - 2; ++k) {
-		for (int i = 0; i < NUM - k; ++i) {
+	for (int i = 0; i < 1000; ++i) {
+		num[i] = uid(dre);
+	}
+
+	// 정렬 - qsort
+	for (int j = 0; j < 1000 - 1; ++j) {
+		for (int i = 0; i < 1000 - 1; ++i) {
 			if (num[i] > num[i + 1]) {
-				change(num[i], num[i + 1]);
+				int temp{ num[i] };
+				num[i] = num[i + 1];
+				num[i + 1] = temp;
 			}
 		}
 	}
 
+	// 정렬 후 출력
 	for (int num : num) {
-		cout << num << " ";
+		cout << format("{:4d}",num);
 	}
-	cout << endl;
-
+	cout << '\n';
 	save("소스.cpp");
-}
-
-void change(int& p, int& q) {
-	int temp{ p };
-	p = q;
-	q = temp;
 }

@@ -18,11 +18,14 @@ using namespace std;
 
 default_random_engine dre;
 uniform_int_distribution uid{ 1, 99'9999 };
+
+int cnt;
+
 //--------
 int main()
 //--------
 {
-	const int NUM{ 20'0000 };
+	const int NUM{ 20 };
 	int num[NUM];
 	
 	// &는 원래 데이터에 붙인 별명이니까 원본을 그대로 사용하고 싶을 떄 쓴다
@@ -39,11 +42,12 @@ int main()
 	for (int num : num) {
 		cout << format("{:8d}",num);
 	}
-	cout << '\n';
+	cout << "비교함수 호출 횟수 : " << cnt << '\n';
 	save("소스.cpp");
 }
 
-int 비교함수(const void* p, const void* q) {
-	return *(int*)p - *(int*)q;
-
+int 비교함수(const void* a, const void* b) {
+	++cnt;
+	cout << "비교 - " << *(int*)a << ", " << *(int*)b << endl;
+	return *(int*)a - *(int*)b;
 }

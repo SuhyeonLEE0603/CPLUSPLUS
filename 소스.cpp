@@ -9,8 +9,6 @@
 #include "save.h"
 using namespace std;
 
-int comp(const void*, const void*);
-
 //--------
 int main()
 //--------
@@ -19,13 +17,11 @@ int main()
 	cout << p << endl;
 
 	// [문제] p를 오름차순으로 정렬한 후 출력하라
-	qsort(p, strlen(p), sizeof(char), comp);
+	qsort(p, strlen(p), sizeof(char), [](const void* a, const void* b) {
+		return *(char*)a - *(char*)b; }
+	);
 
 	cout << p << endl;
 	
 	save("소스.cpp");
-}
-
-int comp(const void* a, const void* b) {
-	return *(char*)a - *(char*)b;
 }

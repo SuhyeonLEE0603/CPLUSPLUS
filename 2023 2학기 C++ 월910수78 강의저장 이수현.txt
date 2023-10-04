@@ -664,6 +664,7 @@ void change(int& p, int& q) {
 using namespace std;
 
 void change(int&, int&);			// 선언과 정의를 반드시 나눠야함
+									// * & : 다른 지역에 있는 메모리에 엑세스하기 위해 사용
 
 //--------
 int main()

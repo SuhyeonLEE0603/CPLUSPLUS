@@ -4,6 +4,8 @@
 //---------------------------------------------------------------------------
 // 정렬(sort) - C언어 라이브러리 함수 qsort
 //---------------------------------------------------------------------------
+// 과제 - 이름없는 함수 람다(lambda)
+//---------------------------------------------------------------------------
 
 #include <iostream>
 #include "save.h"
@@ -13,15 +15,10 @@ using namespace std;
 int main()
 //--------
 {
-	char p[] = "the quick brown fox jumps over the lazy dog";
-	cout << p << endl;
+	auto x = []() {
+		cout << "안녕 난 람다라고 해 반가워!" << endl;
+		};
+	x();				// 이런 식으로 이름 붙이는 거는 무의미한 행동
 
-	// [문제] p를 오름차순으로 정렬한 후 출력하라
-	qsort(p, strlen(p), sizeof(char), [](const void* a, const void* b) {
-		return *(char*)a - *(char*)b; }
-	);
-
-	cout << p << endl;
-	
 	save("소스.cpp");
 }

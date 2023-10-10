@@ -7,8 +7,11 @@
 //---------------------------------------------------------------------------
 
 #include <iostream>
+#include <chrono>
 #include "save.h"
 using namespace std;
+
+// [관찰] 윈도우의 메모리 관리를 확인해 본다(ctrl + alt + delete)
 
 //--------
 int main()
@@ -17,14 +20,8 @@ int main()
 	save("소스.cpp");
 	int cnt{};
 	while (true) {
-		// 메모리 1GB 동적할당
-		try	{
-			new char[1'000'000'000];			// 할당해줄 메모리가 없으면 시스템은 예외를 던진다
-		}
-		catch (exception& e) {
-			cout << e.what() << endl;
-			return 333;
-		}
-		cout << ++cnt << "기가 바이트 요청" << endl;
+		new char[1'000'000'000] {1, 2, 3};
+		cout << ++cnt << "기가 요청" << endl;
+		this_thread::sleep_for(3s);				// 3초 쉰다
 	}
 }

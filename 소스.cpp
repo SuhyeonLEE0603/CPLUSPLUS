@@ -10,37 +10,21 @@
 #include "save.h"
 using namespace std;
 
-// [문제] 사용자가 정수 num을 입력한다.
-// int 를 num 개 만큼 저장할 공간을 확보한다.
-// 그 공간을 1부터 시작하는 정수로 채운다. [1, num]
-// int 값의 합계를 화면에 출력하라.
-// 이 과정을 계속 반복하라.
-
 //--------
 int main()
 //--------
 {
 	save("소스.cpp");
-
+	int cnt{};
 	while (true) {
-		cout << "int 값을 입력하세요 - ";
-		int num;
-		cin >> num;
-
-		int* p = new int[num];
-
-		for (int i = 0; i < num; ++i) {
-			p[i] = i + 1;
+		// 메모리 1GB 동적할당
+		try	{
+			new char[1'000'000'000];			// 할당해줄 메모리가 없으면 시스템은 예외를 던진다
 		}
-
-		// 합계 계산
-		int sum{};
-		for (int i = 0; i < num; ++i) {
-			sum += p[i];
+		catch (exception& e) {
+			cout << e.what() << endl;
+			return 333;
 		}
-
-		cout << "1부터 " << num << "까지 합계 = " << sum << endl;
-		
-		delete[] p;			// 동적 할당을 하고 나서 끝날 때 반드시 메모리 할당을 해제 해야함
+		cout << ++cnt << "기가 바이트 요청" << endl;
 	}
 }

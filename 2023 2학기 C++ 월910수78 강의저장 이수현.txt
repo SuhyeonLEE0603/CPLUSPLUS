@@ -1388,7 +1388,7 @@ using namespace std;
 int main()
 //--------
 {
-	ifstream in{ "1부터 100까지" };
+	ifstream in{ "1부터 100까지" };			// RAII
 	
 	if (!in) {
 		cout << "해당 파일을 열 수 없습니다." << endl;

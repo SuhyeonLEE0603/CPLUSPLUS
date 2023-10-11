@@ -12,20 +12,27 @@
 #include "save.h"
 using namespace std;
 
-default_random_engine dre;
-uniform_int_distribution uid;
+// [문제] "int만개.txt"에는 int 값을 10000개가 있다
+// 가장 작은 값을찾아 화면에 출력하라 
 
 //--------
 int main()
 //--------
 {
-	ofstream out{ "int만개.txt" };
-	for (int i = 0; i < 10000; ++i) {
-		out << uid(dre) << ' ';
-		if (i % 10 == 0) {
-			out << endl;
+	ifstream in{ "int만개.txt" };
+	if (!in) {
+		cout << "해당 파일을 열 수 없음" << endl;
+		return 0;
+	}
+
+	int min{ numeric_limits<int>::max() };
+	int n;
+	while (in >> n) {
+		if (min > n) {
+			min = n;
 		}
 	}
 
+	cout << "최소값 : " << min << endl;
 	save("소스.cpp");
 }

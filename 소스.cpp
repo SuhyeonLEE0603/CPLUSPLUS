@@ -8,30 +8,24 @@
 
 #include <iostream>
 #include <fstream>
+#include <random>
 #include "save.h"
 using namespace std;
 
-// [문제] "1부터100" 파일에는 int가 100개 기록되어 있다.
-// 읽어서 화면에 출력하라
+default_random_engine dre;
+uniform_int_distribution uid;
 
 //--------
 int main()
 //--------
 {
-	ifstream in{ "1부터 100까지" };
-	
-	if (!in) {
-		cout << "해당 파일을 열 수 없습니다." << endl;
-		return 0;
+	ofstream out{ "int만개.txt" };
+	for (int i = 0; i < 10000; ++i) {
+		out << uid(dre) << ' ';
+		if (i % 10 == 0) {
+			out << endl;
+		}
 	}
-
-	int num;
-	
-	while (in >> num) {
-		cout << num << ' ';
-	}
-	
-	cout << endl;
 
 	save("소스.cpp");
 }

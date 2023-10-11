@@ -11,18 +11,27 @@
 #include "save.h"
 using namespace std;
 
-// [문제] 파일에 1부터 100까지 정수를 출력하라
+// [문제] "1부터100" 파일에는 int가 100개 기록되어 있다.
+// 읽어서 화면에 출력하라
 
 //--------
 int main()
 //--------
 {
-	ofstream 파일{ "1부터 100까지" };
-
-	for (int i = 0; i < 100; ++i) {
-		파일 << i + 1 << ' ';
+	ifstream in{ "1부터 100까지" };
+	
+	if (!in) {
+		cout << "해당 파일을 열 수 없습니다." << endl;
+		return 0;
 	}
-	파일 << endl;
-	save("소스.cpp");
 
+	int num;
+	
+	while (in >> num) {
+		cout << num << ' ';
+	}
+	
+	cout << endl;
+
+	save("소스.cpp");
 }

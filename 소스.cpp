@@ -13,7 +13,7 @@
 using namespace std;
 
 // [문제] "int만개.txt"에는 int 값을 10000개가 있다
-// 가장 작은 값을찾아 화면에 출력하라 
+// 오름차순으로 정렬해서 출력하라
 
 //--------
 int main()
@@ -25,14 +25,24 @@ int main()
 		return 0;
 	}
 
-	int min{ numeric_limits<int>::max() };
+	int a[10000];
+	int i{};
 	int n;
+	
 	while (in >> n) {
-		if (min > n) {
-			min = n;
-		}
+		a[i++] = n;
+
 	}
 
-	cout << "최소값 : " << min << endl;
+	qsort(a, 10000, sizeof(int), [](const void* a, const void* b) {
+		return *(int*)a - *(int*)b; }
+	);
+
+	for (int n : a) {
+		cout << n << ' ';
+	}
+
+	cout << endl;
+
 	save("소스.cpp");
 }

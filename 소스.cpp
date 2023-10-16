@@ -8,41 +8,36 @@
 
 #include <iostream>
 #include <fstream>
-#include <random>
 #include "save.h"
 using namespace std;
 
-// [문제] "int만개.txt"에는 int 값을 10000개가 있다
-// 오름차순으로 정렬해서 출력하라
+// [문제] "소스.cpp" 에 알파벳 소문자의 개수를 세서 다음과 같이 출력하라
+// a - 12
+// b - 22
+// ...
+// z - 0
 
 //--------
 int main()
 //--------
 {
-	ifstream in{ "int만개.txt" };
+	ifstream in{ "소스.cpp" };
 	if (!in) {
-		cout << "해당 파일을 열 수 없음" << endl;
+		cout << "파일을 열 수 없음" << endl;
 		return 0;
 	}
 
-	int a[10000];
-	int i{};
-	int n;
+	int num[26]{};
+	char c;
+	while (in >> c) {
+		if (islower(c)) {
+			++num[c - 'a'];
+		}
+	}
+
+	for (int i = 0; i < 26; ++i) {
+		cout << static_cast<char>('a' + i) << " - " << num[i] << endl;
+	}
 	
-	while (in >> n) {
-		a[i++] = n;
-
-	}
-
-	qsort(a, 10000, sizeof(int), [](const void* a, const void* b) {
-		return *(int*)a - *(int*)b; }
-	);
-
-	for (int n : a) {
-		cout << n << ' ';
-	}
-
-	cout << endl;
-
 	save("소스.cpp");
 }

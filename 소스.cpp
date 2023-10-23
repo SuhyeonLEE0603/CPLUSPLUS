@@ -43,7 +43,20 @@ public:
 		//PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
 	}
 	// copy assignment operator - 복사할당연산자
+	Dog& operator=(const Dog& other) {		
+		// 자기자신 할당 금지
+		if (this == &other) {
+			return *this;
+		}
 
+		// 자신의 메모리 정리
+		cout << name << "복사할당연산자 호출" << '\n';
+		name = other.name;
+		cout << name << '\n';
+		age = other.age;
+
+		return *this;
+	}
 };
 
 //--------

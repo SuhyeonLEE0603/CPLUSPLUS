@@ -23,12 +23,12 @@ class Dog {
 public:
 	Dog() {
 		cout << "생성자가 호출됨" << '\n';
-		PlaySound(L"dog-bark6.wav", NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
 	}
 
 	~Dog() {
 		cout << "소멸자가 호출됨" << '\n';
-		PlaySound(L"개소멸.wav", NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
 	}
 };
 
@@ -37,7 +37,9 @@ int main()
 //--------
 {
 	cout << "메인 시작" << '\n';
-	Dog dog;
+
+	// C++은 Dog* p = new Dog; 처럼 메모리할당을 하지 않음
+	unique_ptr<Dog> dog{ new Dog };		// RALL
 	
 	save("소스.cpp");
 	cout << "메인 끝" << '\n';

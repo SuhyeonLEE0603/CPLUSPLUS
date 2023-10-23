@@ -36,7 +36,9 @@ public:
 int main()
 //--------
 {
-	Dog dog[5];
+	cout << "메인 시작" << '\n';
+	Dog dog;
 	
 	save("소스.cpp");
+	cout << "메인 끝" << '\n';
 }

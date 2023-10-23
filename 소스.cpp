@@ -25,6 +25,11 @@ public:
 		cout << "»ı¼ºÀÚ°¡ È£ÃâµÊ" << '\n';
 		PlaySound(L"dog-bark6.wav", NULL, SND_FILENAME | SND_ASYNC);
 	}
+
+	~Dog() {
+		cout << "¼Ò¸êÀÚ°¡ È£ÃâµÊ" << '\n';
+		PlaySound(L"°³¼Ò¸ê.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}
 };
 
 //--------

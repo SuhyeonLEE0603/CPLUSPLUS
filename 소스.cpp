@@ -21,31 +21,41 @@ class Dog {
 	int age;
 	 
 public:
-	Dog() {
+	Dog() {		// default 생성자
 		cout << "생성자가 호출됨" << '\n';
-		PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
+		//PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
 	}
 
 	Dog(string name, int age) : name{ name }, age{ age } {
 		cout << name << " - Dog(string, int) 호출됨" << '\n';
-		PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
+		//PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
 		
 	}
 
-	~Dog() {
+	~Dog() {	// 소멸자
 		cout << name << " - 소멸자가 호출됨" << '\n';
-		PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
+		//PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
 	}
+
+	// copy constructor - 복사생성자
+	Dog(const Dog& other) : name{ other.name }, age{ other.age } {
+		cout << name << "을 복사생성함" << '\n';
+		//PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
+	}
+	// copy assignment operator - 복사할당연산자
+
 };
 
 //--------
 int main()
 //--------
 {
-	cout << "메인 시작" << '\n';
 
-	Dog dog{ "댕댕"s, 2 };
+	Dog dog { "댕댕"s, 2 };
+	Dog x { "x"s, 10 };
 	
+	Dog d = dog;		// 복사 생성
+	d = x;				// 복사 할당
+
 	save("소스.cpp");
-	cout << "메인 끝" << '\n';
 }

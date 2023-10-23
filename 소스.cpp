@@ -26,8 +26,14 @@ public:
 		PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
 	}
 
+	Dog(string name, int age) : name{ name }, age{ age } {
+		cout << name << " - Dog(string, int) 호출됨" << '\n';
+		PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
+		
+	}
+
 	~Dog() {
-		cout << "소멸자가 호출됨" << '\n';
+		cout << name << " - 소멸자가 호출됨" << '\n';
 		PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
 	}
 };
@@ -38,8 +44,7 @@ int main()
 {
 	cout << "메인 시작" << '\n';
 
-	// C++은 Dog* p = new Dog; 처럼 메모리할당을 하지 않음
-	unique_ptr<Dog> dog{ new Dog };		// RALL
+	Dog dog{ "댕댕"s, 2 };
 	
 	save("소스.cpp");
 	cout << "메인 끝" << '\n';

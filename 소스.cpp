@@ -1,61 +1,30 @@
-// 2023. 10. 23 월										(8주 1일)
-// 10월 25일(8주 2일) - 중간시험, class 문제 x
-//---------------------------------------------------------------------------
-// class
-//---------------------------------------------------------------------------
-// [과제] 나만의 자료형을 많이 만들고 반복 학습
-//---------------------------------------------------------------------------
-
 #include <iostream>
-#include <Windows.h>
-#include <mmsystem.h>
-#include <string>
 #include "save.h"
-
-#pragma comment (lib, "winmm.lib")
 
 using namespace std;
 
-class Dog {
-	string name;
-	int age;
-	 
+// [문제] 나는 Memory Monster다. 생성시에 int 값 num을 전달하면
+// Free store에 num개의 int를 저장할 공간을 확보하고 그 값을 모두 num으로 채운다.
+// 다음 코드가 문제없이 실행되도록 코딩하자
+
+class MemoryMonster {
+	int num;
+	int* p;
 public:
-	Dog() {		// default 생성자
-		cout << "생성자가 호출됨" << '\n';
-		//PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
-	}
 
-	Dog(string name, int age) : name{ name }, age{ age } {
-		cout << name << " - Dog(string, int) 호출됨" << '\n';
-		//PlaySound(L"dog-bark6.wav", NULL, SND_ASYNC);
-		
-	}
-
-	~Dog() {	// 소멸자
-		cout << name << " - 소멸자가 호출됨" << '\n';
-		//PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
-	}
-
-	// copy constructor - 복사생성자
-	Dog(const Dog& other) : name{ other.name }, age{ other.age } {
-		cout << name << "을 복사생성함" << '\n';
-		//PlaySound(L"개소멸.wav", NULL, SND_ASYNC);
-	}
-	// copy assignment operator - 복사할당연산자
-	Dog& operator=(const Dog& other) {		
-		// 자기자신 할당 금지
-		if (this == &other) {
-			return *this;
+	MemoryMonster(int n) : num{ n } {
+		p = new int[num];
+		for (int i = 0; i < num; ++i) {
+			p[i] = num;
 		}
+	}
 
-		// 자신의 메모리 정리
-		cout << name << "복사할당연산자 호출" << '\n';
-		name = other.name;
-		cout << name << '\n';
-		age = other.age;
+	void show() {
+		cout << "Monster - " << num << endl;
+	}
 
-		return *this;
+	~MemoryMonster() {
+		delete[] p;
 	}
 };
 
@@ -63,12 +32,9 @@ public:
 int main()
 //--------
 {
+	MemoryMonster mon{ 123 };
 
-	Dog dog { "댕댕"s, 2 };
-	Dog x { "x"s, 10 };
-	
-	Dog d = dog;		// 복사 생성
-	d = x;				// 복사 할당
+	mon.show();		// 화면에 "Monster - 123" 이라고 출력한다
 
-	save("소스.cpp");
+	//save("소스.cpp");
 }

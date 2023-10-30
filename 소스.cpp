@@ -32,9 +32,11 @@ public:
 int main()
 //--------
 {
-	MemoryMonster mon{ 123 };
+	MemoryMonster a{ 123 };
+	MemoryMonster b{ 3333 };
 
-	mon.show();		// 화면에 "Monster - 123" 이라고 출력한다
+	a.show();		// 화면에 "Monster - 123" 이라고 출력한다
+	b.show();
 
-	//save("소스.cpp");
+	save("소스.cpp");
 }

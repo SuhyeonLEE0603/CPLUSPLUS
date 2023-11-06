@@ -27,6 +27,14 @@ public:
 		delete[] p;
 	}
 
+	STRING(const STRING& other) : size{ other.size } {
+		p = new char[size];
+
+		// 깊은 복사
+		memcpy(p, other.p, size);
+		cout << "STRING 복사생성 - " << size << ", 번지:" << (void*)p << endl;
+	}
+
 	void show() {
 		for (int i = 0; i < size; ++i) {
 			cout << p[i];
@@ -41,8 +49,10 @@ int main()
 //--------
 {	
 	// STRING의 생성자는 const char* 로 전달하고 처리하자. string 사용하지 말 것
-	STRING s{ "안녕? 난 C의 char*를 완벽하게 대체하는 객체야!" };
-	
+	STRING s{ "난 STRING이야!" };
+	STRING t = s;
+
+	t.show();
 	s.show();
-	//save("소스.cpp");
+	save("소스.cpp");
 }

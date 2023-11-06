@@ -49,11 +49,23 @@ public:
 		return *this;
 	}
 
+	// C++11에서 도입한 이동생성과 이동할당을 코딩
+	// && - r-vallue reference(이동문법지원과 완벽전달(perfect forwading))
+	STRING(STRING&& other) : size{other.size} {
+		p = other.p;
+
+		// 만료(expired)될 객체 other를 초기화한다
+		other.size = 0;
+		other.p = nullptr;
+
+		cout << "STRING 이동생성 - " << size << ", 번지:" << (void*)p << endl;
+
+	}
+
 	void show() {
 		for (int i = 0; i < size; ++i) {
 			cout << p[i];
 		}
-
 		cout << endl;
 	}
 };
@@ -62,15 +74,12 @@ public:
 int main()
 //--------
 {	
-	// STRING의 생성자는 const char* 로 전달하고 처리하자. string 사용하지 말 것
-	STRING s{ "난 STRING이야!" };
-	STRING t{ "오늘은 비가 왔다" };
+	STRING s{ "글자를 메모리에 저장하고 관리한다" };
+	STRING t = move(s);		// 이동생성자를 코딩한다면 이동이 가능, 없으면 대신 복사생성
 
+	cout << "s -";
 	s.show();
+	cout << "t -";
 	t.show();
-
-	t = s;
-	t.show();
-
-	//save("소스.cpp");
+	save("소스.cpp");
 }

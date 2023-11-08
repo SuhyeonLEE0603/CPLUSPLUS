@@ -4,7 +4,6 @@
 // 2023. 11. 8 颇老 盒府
 //----------------------------------------------------------------------------------
 #pragma once
-#include <string>
 
 class STRING {
 	size_t size;
@@ -12,17 +11,19 @@ class STRING {
 
 public:
 
-	STRING(const char* s);
+	STRING(const char*);
 	~STRING();
 
 	// 汗荤积己
-	STRING(const STRING& other);
-	STRING& operator=(const STRING& other);
+	STRING(const STRING&);
+	STRING& operator=(const STRING&);
 
 	// 捞悼积己
 	STRING(STRING&& other);
-	STRING& operator=(STRING&& other);
+	STRING& operator=(STRING&&);
 	
-	STRING& operator+(const std::string& other);
+	STRING& operator+(const std::string&);
+	friend std::ostream& operator<<(std::ostream&, const STRING&);
+
 	void show() const;
 };

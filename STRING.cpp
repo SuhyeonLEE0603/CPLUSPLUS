@@ -59,7 +59,7 @@ STRING::STRING(STRING&& other) : size{ other.size }
 }
 
 // 2023. 11. 8 move assignment operator
-STRING& STRING::operator=(STRING&& other) 
+STRING& STRING::operator=(STRING&& other)
 {
 	if (this == &other) {
 		return *this;
@@ -89,4 +89,13 @@ void STRING::show() const
 		std::cout << p[i];
 	}
 	std::cout << std::endl;
+}
+
+std::ostream& operator<<(std::ostream& os, const STRING& s)
+{
+	for (int i = 0; i < s.size; ++i) {
+		os << s.p[i];
+	}
+
+	return os;
 }

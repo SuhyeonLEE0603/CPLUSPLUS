@@ -1,4 +1,4 @@
-// 2023. 11. 6 월										(10주 1일)
+// 2023. 11. 8 수										(10주 2일)
 //---------------------------------------------------------------------------
 // class
 //---------------------------------------------------------------------------
@@ -13,6 +13,7 @@ using namespace std;
 class STRING {
 	size_t size;
 	char* p;
+
 public:
 
 	STRING(const char* s) : size{strlen(s)} {
@@ -62,6 +63,22 @@ public:
 
 	}
 
+	// 2023. 11. 8 move assignment operator
+	STRING& operator=(STRING&& other) {
+		if (this == &other) {
+			return *this;
+		}
+		delete[] p;
+
+		p = other.p;
+		other.p = nullptr;
+		other.size = 0;
+
+		cout << "STRING 이동할당 - " << size << ", 번지:" << (void*)p << endl;
+		return *this;
+
+	}
+
 	void show() {
 		for (int i = 0; i < size; ++i) {
 			cout << p[i];
@@ -75,11 +92,23 @@ int main()
 //--------
 {	
 	STRING s{ "글자를 메모리에 저장하고 관리한다" };
-	STRING t = move(s);		// 이동생성자를 코딩한다면 이동이 가능, 없으면 대신 복사생성
+	STRING t{ "나도 문자열을 관리하는 중" };
 
 	cout << "s -";
 	s.show();
 	cout << "t -";
 	t.show();
+
+	t = move(s);		// move assignment(special 함수)가 호출되는 상황
+						// move sementic에 미리 함수가 있으면 그 함수를 호출하고
+						// 함수가 없다면 복사할당연사자를 대신 호출한다
+
+	cout << "이미 만들어진 객체 T가 S의 자원을 이동하여 가져온다" << endl;
+
+	cout << "s -";
+	s.show();
+	cout << "t -";
+	t.show();
+
 	save("소스.cpp");
 }

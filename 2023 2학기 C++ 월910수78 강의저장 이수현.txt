@@ -2594,8 +2594,37 @@ int main()
 	save("소스.cpp");
 }
 
+
 ==================================================
-STRING.cpp2023-11-08 수요일 오후 4:56:32
+소스.cpp2023-11-13 월요일 오후 6:12:54
+==================================================
+// 2023. 11. 13 월										(11주 1일)
+//---------------------------------------------------------------------------
+// class
+//---------------------------------------------------------------------------
+
+#include <iostream>
+#include "STRING.h"
+#include "save.h"
+using namespace std;
+
+//--------
+int main()
+//--------
+{
+
+	STRING s{ "123" };
+
+	s = s + "4567890";		// std::string은 POD 처럼 + 연산자를 사용한다
+	cout << s;				// 화면 출력 - "1234567890"
+
+	save("소스.cpp");
+	save("STRING.cpp");
+	save("STRING.h");
+}
+
+==================================================
+STRING.cpp2023-11-13 월요일 오후 6:12:54
 ==================================================
 //----------------------------------------------------------------------------------
 // STRING.cpp - std::string과 비슷한 클래스
@@ -2605,27 +2634,42 @@ STRING.cpp2023-11-08 수요일 오후 4:56:32
 #include <iostream>
 #include "STRING.h"
 
-STRING::STRING(const char* s) : size{ std::strlen(s) } 
+// 2023. 11. 13
+bool STRING::관찰{false};		// 관찰하려면 어디선가 관찰을 true로 바꾸세요
+
+// 2023. 11. 13 디폴트 생성자
+STRING::STRING()
+{
+	if (관찰)
+		std::cout << "STRING 디폴트 생성자 - " << size << ", 번지:" << (void*)p << std::endl;
+}
+
+STRING::STRING(const char* s) 
+	: size{ std::strlen(s) }
 {
 	p = new char[size];
 	std::memcpy(p, s, size);
-
-	std::cout << "STRING(const char*) - " << size << ", 번지:" << (void*)p << std::endl;
+	
+	if (관찰)
+		std::cout << "STRING(const char*) - " << size << ", 번지:" << (void*)p << std::endl;
 }
 
 STRING::~STRING() 
 {
-	std::cout << "~STRING() - " << size << ", 번지:" << (void*)p << std::endl;
+	if (관찰)
+		std::cout << "~STRING() - " << size << ", 번지:" << (void*)p << std::endl;
 	delete[] p;
 }
 
-STRING::STRING(const STRING& other) : size{ other.size } 
+STRING::STRING(const STRING& other) 
+	: size{ other.size } 
 {
 	p = new char[size];
 
 	// 깊은 복사
 	memcpy(p, other.p, size);
-	std::cout << "STRING 복사생성 - " << size << ", 번지:" << (void*)p << std::endl;
+	if (관찰)
+		std::cout << "STRING 복사생성 - " << size << ", 번지:" << (void*)p << std::endl;
 }
 
 STRING& STRING::operator=(const STRING& other) 
@@ -2635,11 +2679,13 @@ STRING& STRING::operator=(const STRING& other)
 	}
 
 	delete[] p;
+
 	size = other.size;
 	p = new char[size];
 	memcpy(p, other.p, size);
 
-	std::cout << "STRING 복사할당연산자 - " << size << ", 번지:" << (void*)p << std::endl;
+	if (관찰)
+		std::cout << "STRING 복사할당연산자 - " << size << ", 번지:" << (void*)p << std::endl;
 	return *this;
 }
 
@@ -2658,14 +2704,16 @@ STRING::STRING(STRING&& other) : size{ other.size }
 }
 
 // 2023. 11. 8 move assignment operator
-STRING& STRING::operator=(STRING&& other) 
+STRING& STRING::operator=(STRING&& other)
 {
 	if (this == &other) {
 		return *this;
 	}
 	delete[] p;
 
+	size = other.size;
 	p = other.p;
+ 
 	other.p = nullptr;
 	other.size = 0;
 
@@ -2674,12 +2722,17 @@ STRING& STRING::operator=(STRING&& other)
 
 }
 
-STRING& STRING::operator+(const std::string& other)
+STRING STRING::operator+(const char* s) const
 {
-	memcpy(p + size, &other, other.size());
-	size += other.size();
+	STRING temp;
 
-	return *this;
+	temp.size = size + strlen(s);
+	temp.p = new char[temp.size];
+
+	memcpy(temp.p, p, size);
+	memcpy(temp.p + size, s, strlen(s));
+
+	return temp;
 }
 
 void STRING::show() const
@@ -2690,63 +2743,52 @@ void STRING::show() const
 	std::cout << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& os, const STRING& s)
+{
+	for (int i = 0; i < s.size; ++i) {
+		os << s.p[i];
+	}
+
+	return os;
+}
+
 
 ==================================================
-STRING.h2023-11-08 수요일 오후 4:56:32
+STRING.h2023-11-13 월요일 오후 6:12:54
 ==================================================
 //----------------------------------------------------------------------------------
 // STRING.h - std::string과 비슷한 클래스
 // 
 // 2023. 11. 8 파일 분리
+// 2023. 11. 13 원할때만 관찰할 수 있게 Flag 처리
 //----------------------------------------------------------------------------------
 #pragma once
 
 class STRING {
-	size_t size;
-	char* p;
+	size_t size{};
+	char* p{};
+	
+public:
+	// 2023. 11. 13
+	static bool 관찰;					// 클래스 로컬 맴버이면서 전역변수 취급
 
 public:
-
-	STRING(const char* s);
-	~STRING();
+	// 2023. 11. 13 디폴트 생성자
+	STRING();							// special funtion	
+	STRING(const char*);
+	~STRING();							// special funtion
 
 	// 복사생성
-	STRING(const STRING& other);
-	STRING& operator=(const STRING& other);
+	STRING(const STRING&);				// special funtion
+	STRING& operator=(const STRING&);	// special funtion
 
 	// 이동생성
-	STRING(STRING&& other);
-	STRING& operator=(STRING&& other);
+	STRING(STRING&& other);				// special funtion
+	STRING& operator=(STRING&&);		// special funtion
 	
-	STRING& operator+(const std::string& other);
+	// 2023. 11. 13 연산자 오버로딩
+	STRING operator+(const char*) const;
+	friend std::ostream& operator<<(std::ostream&, const STRING&);
+
 	void show() const;
 };
-
-
-==================================================
-소스.cpp2023-11-08 수요일 오후 5:09:11
-==================================================
-// 2023. 11. 8 수										(10주 2일)
-//---------------------------------------------------------------------------
-// class
-//---------------------------------------------------------------------------
-
-#include <iostream>
-#include "STRING.h"
-#include "save.h"
-using namespace std;
-
-//--------
-int main()
-//--------
-{
-	save("소스.cpp");
-
-	STRING s{ "123" };
-
-	s = s + "4567890";		// std::string은 POD 처럼 + 연산자를 사용한다
-
-	
-	cout << s;				// 화면 출력 - "1234567890"
-
-}

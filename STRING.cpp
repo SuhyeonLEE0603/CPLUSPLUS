@@ -120,6 +120,6 @@ std::ostream& operator<<(std::ostream& os, const STRING& s)
 	for (int i = 0; i < s.size; ++i) {
 		os << s.p[i];
 	}
-
+	
 	return os;
 }

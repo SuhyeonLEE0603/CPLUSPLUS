@@ -12,19 +12,17 @@ using namespace std;
 int main()
 //--------
 {
+	STRING s[5]{ "11월", "13일 입니다", "오늘은", "월요일입니다", "11주 1일째 입니다" };
 
-	STRING s{ "123" };
+	// [문제] s를 길이 오름차순으로 정렬하라
 
-	s = s + "4567890";		// std::string은 POD 처럼 + 연산자를 사용한다
-	cout << s;				// 화면 출력 - "1234567890"
+	qsort(s, 5, sizeof(s), [](const void* a, const void* b) {
+		return (int)(((STRING*)a)->length() - ((STRING*)b)->length());
+		});
 
-	// 컴파일러는 연산자 오버로딩을 해결하기 위해
-	// lhs  operator기호  rhs 
-	// 1. lhs의 맴버함수로 operator기호(rhs) 함수가 있는지 찾음
-	// 2. operator기호(lhs, rhs)인 전역함수가 있나 찾음
-	
+	for (STRING s : s) {
+		cout << s << endl;
+	}
 
-	save("소스.cpp");
-	save("STRING.cpp");
-	save("STRING.h");
+	//save("소스.cpp");
 }

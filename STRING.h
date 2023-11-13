@@ -30,9 +30,12 @@ public:
 	
 	// 2023. 11. 13 연산자 오버로딩
 	STRING operator+(const char*) const;
-	
-	// 2023. 11 .13 입출력은 특별하기 때문에 맴버처럼 취급한다
-	friend std::ostream& operator<<(std::ostream&, const STRING&);
 
 	void show() const;
+
+	// 2023. 11. 13 표준 string처럼 관리하는 글자 수를 알려준다
+	size_t length() const;
+
+	// 2023. 11 .13 입출력은 특별하기 때문에 맴버처럼 취급한다
+	friend std::ostream& operator<<(std::ostream&, const STRING&);
 };

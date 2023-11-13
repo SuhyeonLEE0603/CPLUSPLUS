@@ -115,6 +115,10 @@ void STRING::show() const
 	std::cout << std::endl;
 }
 
+size_t STRING::length() const {
+	return size;
+}
+
 std::ostream& operator<<(std::ostream& os, const STRING& s)
 {
 	for (int i = 0; i < s.size; ++i) {

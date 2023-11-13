@@ -30,6 +30,7 @@ public:
 	
 	// 2023. 11. 13 연산자 오버로딩
 	STRING operator+(const char*) const;
+	char operator[](int) const;
 
 	void show() const;
 
@@ -38,4 +39,5 @@ public:
 
 	// 2023. 11 .13 입출력은 특별하기 때문에 맴버처럼 취급한다
 	friend std::ostream& operator<<(std::ostream&, const STRING&);
+
 };

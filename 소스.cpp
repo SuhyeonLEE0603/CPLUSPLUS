@@ -12,17 +12,12 @@ using namespace std;
 int main()
 //--------
 {
-	STRING s[5]{ "11월", "13일 입니다", "오늘은", "월요일입니다", "11주 1일째 입니다" };
+	STRING s{ "12345" };
 
-	// [문제] s를 길이 오름차순으로 정렬하라
-
-	qsort(s, 5, sizeof(s), [](const void* a, const void* b) {
-		return (int)(((STRING*)a)->length() - ((STRING*)b)->length());
-		});
-
-	for (STRING s : s) {
-		cout << s << endl;
+	for (int i = 0; i < s.length(); ++i) {
+		cout << s[i] << endl;
+		//cout << s.operator[](i) << endl;
 	}
 
-	//save("소스.cpp");
+	save("소스.cpp");
 }

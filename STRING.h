@@ -31,6 +31,7 @@ public:
 	// 2023. 11. 13 연산자 오버로딩
 	STRING operator+(const char*) const;
 	char operator[](int) const;
+	char& operator[](int);
 
 	void show() const;
 

@@ -112,6 +112,11 @@ char STRING::operator[](int idx) const
 	return p[idx];
 }
 
+char& STRING::operator[](int idx)
+{
+	return p[idx];
+}
+
 void STRING::show() const
 {
 	for (int i = 0; i < size; ++i) {

@@ -12,12 +12,15 @@ using namespace std;
 int main()
 //--------
 {
-	STRING s{ "12345" };
+	STRING s{ "C++ Programming Language - Operator Overloading" };
 
-	for (int i = 0; i < s.length(); ++i) {
-		cout << s[i] << endl;
-		//cout << s.operator[](i) << endl;
-	}
+	// [문제] s의 문자열을 오름차순으로 정렬하라
 
+	qsort(&s[0], s.length(), sizeof(char), [](const void* a, const void* b) {
+		return *(char*)a - *(char*)b;
+		});
+
+	cout << s << endl;
+	
 	save("소스.cpp");
 }

@@ -2,32 +2,46 @@
 //---------------------------------------------------------------------------
 // class
 //---------------------------------------------------------------------------
-
 #include <iostream>
 #include "STRING.h"
-#include <algorithm>
 #include "save.h"
 using namespace std;
+
+class INT {
+	int n;
+
+public:
+	INT() {}					// 생성자를 하나라도 코딩했다면 special 함수인 default ctor를 코딩함
+	INT(int i) : n{ i } {
+	}
+
+	INT& operator++() {			// pre-increment
+		++n;
+		return *this;
+	}
+
+	INT operator++(int) {		// post-increment
+		INT temp{ *this };
+		++(*this);
+		return temp;
+	}
+	
+	friend ostream& operator<<(ostream& os, INT i) {
+		return os << i.n;
+	}
+};
 
 //--------
 int main()
 //--------
 {
-	STRING s[5]{ "333", "1", "55555", "4444", "22" };
+	INT n{ 100 };
+
+	INT k = ++n;
+	INT x = n++;		// INT.operator++(int);
 	
-	// [문제] "122333444455555" 를 만들어라
-	// s를 모두 더한 temp를 만들어라
-
-	qsort(s, sizeof(s) / sizeof(STRING), sizeof(STRING), [](const void* a, const void* b) {
-		return static_cast<int>(((STRING*)a)->length() - ((STRING*)b)->length());		// return 값이 양수면 위치를 바꿈
-		});
-
-	STRING temp;
-	for (const STRING& s : s) {
-		temp = temp + s;
-	}
-
-	cout << temp << endl;
+	cout << k << endl;
+	cout << x << endl;
 
 	save("소스.cpp");
 }

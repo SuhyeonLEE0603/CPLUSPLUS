@@ -71,7 +71,8 @@ STRING::STRING(STRING&& other) : size{ other.size }
 	other.size = 0;
 	other.p = nullptr;
 
-	std::cout << "STRING 이동생성 - " << size << ", 번지:" << (void*)p << std::endl;
+	if (관찰)
+		std::cout << "STRING 이동생성 - " << size << ", 번지:" << (void*)p << std::endl;
 
 }
 
@@ -89,7 +90,8 @@ STRING& STRING::operator=(STRING&& other)
 	other.p = nullptr;
 	other.size = 0;
 
-	std::cout << "STRING 이동할당 - " << size << ", 번지:" << (void*)p << std::endl;
+	if (관찰)
+		std::cout << "STRING 이동할당 - " << size << ", 번지:" << (void*)p << std::endl;
 	return *this;
 
 }
@@ -115,6 +117,20 @@ char STRING::operator[](int idx) const
 char& STRING::operator[](int idx)
 {
 	return p[idx];
+}
+
+STRING operator+(const char* p, const STRING& s)
+{
+	// 새로운 STRING temp를 하나 만듦
+	// temp에 p의 문자열을 복사함
+	STRING temp;
+	temp.size = strlen(p) + s.size;
+	temp.p = new char[temp.size];
+
+	memcpy(temp.p, p, strlen(p));				// 왼쪽 operand의 내용을 복사
+	memcpy(temp.p + strlen(p), s.p, s.size);	// 오른쪽 operand의 내용을 복사
+
+	return temp;
 }
 
 void STRING::show() const

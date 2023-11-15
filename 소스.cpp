@@ -5,25 +5,29 @@
 
 #include <iostream>
 #include "STRING.h"
+#include <algorithm>
 #include "save.h"
 using namespace std;
-
-
-
 
 //--------
 int main()
 //--------
 {
-	STRING::관찰 = true;
-	STRING s{ "C++ Programming" };
+	STRING s[5]{ "333", "1", "55555", "4444", "22" };
+	
+	// [문제] "122333444455555" 를 만들어라
+	// s를 모두 더한 temp를 만들어라
 
-	s = "학생을 쳐다보지 않는다 " + s;
-	// 1. 왼쪽 피연산자의 맴버로 .operator+(s)가 있나 찾음
-	// 2. 전역함수를 찾음 operator+( const char*, STRING )
+	qsort(s, sizeof(s) / sizeof(STRING), sizeof(STRING), [](const void* a, const void* b) {
+		return static_cast<int>(((STRING*)a)->length() - ((STRING*)b)->length());		// return 값이 양수면 위치를 바꿈
+		});
 
+	STRING temp;
+	for (const STRING& s : s) {
+		temp = temp + s;
+	}
 
-	cout << s << endl;
+	cout << temp << endl;
 
 	save("소스.cpp");
 }

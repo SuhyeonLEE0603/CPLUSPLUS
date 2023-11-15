@@ -30,11 +30,14 @@ public:
 	
 	// 2023. 11. 13 연산자 오버로딩
 	STRING operator+(const char*) const;
+	// 2023. 11. 15 전역함수라도 friend로 코딩하는 것이 합당함
+	friend STRING operator+(const char*, const STRING&);	// STRING의 크기가 포인터 크기(8바이트)보다 크기 때문에 주소로 처리하는게 이득
+	// 2023. 11. 15 STRING + STRING
+	STRING operator+(const STRING& rhs);
+
 	char operator[](int) const;
 	char& operator[](int);
 
-	// 2023. 11. 15 전역함수라도 friend로 코딩하는 것이 합당함
-	friend STRING operator+(const char*, const STRING&);	// STRING의 크기가 포인터 크기(8바이트)보다 크기 때문에 주소로 처리하는게 이득
 
 	void show() const;
 

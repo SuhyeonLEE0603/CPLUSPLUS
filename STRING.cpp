@@ -109,6 +109,18 @@ STRING STRING::operator+(const char* s) const
 	return temp;
 }
 
+STRING STRING::operator+(const STRING& rhs)
+{
+	STRING temp;
+	temp.size = size + rhs.size;
+	temp.p = new char[temp.size];
+
+	memcpy(temp.p, p, size);
+	memcpy(temp.p + size, rhs.p, rhs.size);
+
+	return temp;		// RVO - Return Value Optimization
+}
+
 char STRING::operator[](int idx) const
 {
 	return p[idx];
@@ -144,6 +156,8 @@ void STRING::show() const
 size_t STRING::length() const {
 	return size;
 }
+
+
 
 std::ostream& operator<<(std::ostream& os, const STRING& s)
 {

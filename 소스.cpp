@@ -2,46 +2,35 @@
 //---------------------------------------------------------------------------
 // class
 //---------------------------------------------------------------------------
+
 #include <iostream>
 #include "STRING.h"
+#include <algorithm>
 #include "save.h"
 using namespace std;
 
-class INT {
-	int n;
+void f(int);
 
-public:
-	INT() {}					// 생성자를 하나라도 코딩했다면 special 함수인 default ctor를 코딩함
-	INT(int i) : n{ i } {
-	}
-
-	INT& operator++() {			// pre-increment
-		++n;
-		return *this;
-	}
-
-	INT operator++(int) {		// post-increment
-		INT temp{ *this };
-		++(*this);
-		return temp;
-	}
-	
-	friend ostream& operator<<(ostream& os, INT i) {
-		return os << i.n;
-	}
-};
+void f(int n) {
+	cout << "인자" << n << "을 전달받았습니다" << endl;
+}
 
 //--------
 int main()
 //--------
 {
-	INT n{ 100 };
+	(*f)(3);		// 함수 이름 자체는 주소이기 때문에 이렇게 코딩 가능
 
-	INT k = ++n;
-	INT x = n++;		// INT.operator++(int);
+	//auto x = f;
+
+	//x(100);
+
+	// int a[10]
 	
-	cout << k << endl;
-	cout << x << endl;
+	void (*x)(int) = f;		// 함수를 함수포인터로 저장가능
+
+	cout << sizeof(x) << endl;
+	cout << typeid(x).name() << endl;
 
 	save("소스.cpp");
 }

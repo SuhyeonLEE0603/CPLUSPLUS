@@ -1,7 +1,8 @@
-// 2023. 11. 15 목										(11주 2일)
+// 2023. 11. 22 수										(12주 2일)
 //---------------------------------------------------------------------------
 // class
-// 2023. 12. 13 기말시험
+// 2023. 12. 11 월(15주 1일) - 한학기 정리, 책 소개
+// 2023. 12. 13 수(15주 2일) - 기말시험
 //---------------------------------------------------------------------------
 
 #include <iostream>
@@ -11,40 +12,66 @@
 #include "STRING.h"
 using namespace std;
 
-default_random_engine dre;
-uniform_int_distribution uid{ 1, 100 };
-
-int gn{ 0 };
+// [문제] "개20마리.txt" 에는 class Dog 객체 20개의 정보가 기록되어 있다
+// class Dog{
+//		int age;
+//		string name;
+// 맴버 변수가 있으며
+//
+//		friend ostream& operator<<(ostream& os, const Dog& dog){
+//		return os << dog.age << "\t" << dog.name << "\t";
+//		}
+// };
+// 연산자 << 를 오버로딩하여 파일에 기록하였다
+//
+// 20마리 정보를 읽어 나이오름차순으로 정렬하여 출력하라
 
 class Dog {
-private:
-	string name;
 	int age;
+	string name;
 
 public:
-	Dog(){			// 이 함수는 자동으로 inline화
-		age = uid(dre);
-		name = "댕댕-" + to_string(++gn) + "호";
+
+	// special 함수를 코딩할 이유가 전혀 없음
+
+	int getAge() const {
+		return age;
 	}
 
 	friend ostream& operator<<(ostream& os, const Dog& dog) {
-		os << "나이 - " << dog.age << ", 이름 - " << dog.name;
-		return os;
+		return os << dog.age << "\t" << dog.name << "\t";
 	}
+	friend istream& operator>>(istream& is, Dog& dog) {
+		return is >> dog.age >> dog.name;
+	}
+
 };
 
 //--------
 int main()
 //--------
 {
-	Dog dogs[20];		// 이름과 나이는 랜덤으로
-
-	ofstream out{ "개20마리.txt" };
-
-	for (const Dog& dog : dogs) {
-		out << dog << endl;
+	ifstream in{ "개20마리.txt" };
+	if (!in) {
+		cout << "파일을 읽지 못했다" << endl;
+		return 0;
 	}
 
+	Dog dogs[20];
+	
+	for (int i = 0; i < 20; ++i) {
+		in >> dogs[i];
+	}
+
+	qsort(dogs, sizeof(dogs) / sizeof(Dog), sizeof(Dog), [](const void* a, const void* b) {
+		return ((Dog*)a)->getAge() - ((Dog*)b)->getAge();
+		});
+
+	cout << "나이 (ascending order)순으로 정렬한 결과" << endl;
+
+	for (const Dog& dog : dogs) {		// const & 꼭 붙일것
+		cout << dog << endl;
+	}
 
 	save("소스.cpp");
 }

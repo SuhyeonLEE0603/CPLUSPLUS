@@ -3422,6 +3422,13 @@ public:
 int main()
 //--------
 {
+	cout << "부모 animal의 크기 - " << sizeof(Animal) << endl;
+	cout << "자식 Dog의 크기 - " << sizeof(Dog) << endl;
+	
+	// 자식 객체의 메모리 속에는 부모 객체의 메모리가 항상 포함되어 있음
+
+	Dog dog{ 10 };	// 10을 생성자에서 처리
+	
 	Dog dog{ 10 };
 	
 	// [문제 1] dog의 메모리를 관찰하자

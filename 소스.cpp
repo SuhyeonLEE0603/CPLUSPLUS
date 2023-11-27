@@ -9,49 +9,33 @@
 #include "STRING.h"
 using namespace std;
 
-// 상속(Inheritance)
-// 1. 코드 재사용
-// 2. 다형성 구현 - One interface, multiple method(behavior)
-
-// 상속 연습 동물 개 새를 상속계층(hierarchy)으로 만들어 본다
+// [상속 연습] 동물 개 새를 상속계층(hirearchy)으로 만들어라
+// C++에서 다형성을 구현하는 핵심키워드 - virtual
+// 어떤 클래스가 virtual 맴버를 만들면 자식 클래스의 같은 맴버는 자동으로 virtual으로 변환됨
+// 전부 virtual, override을 명시적으로 붙여줘서 가독성을 높임
+// final을 붙이면 더 이상 자식 클래스를 만들어도 override 금지
 
 class Animal {
-	int age{ 0 };
-
+	int age;
 public:
-	Animal() {
-		cout << "Animal의 기본생성자" << endl;
+	virtual void move() const {
+		cout << "동물 - 움직인다" << endl;
 	}
-
-	Animal(int n) : age{ n } {
-		cout << "Animal의 생성자" << endl;
-
-	}
-
-	~Animal() {
-		cout << "Animal의 소멸자" << endl;
-	}
-	void move() const {
-		cout << "동물 움직인다 - " << age << endl;
-	}
-
 };
 
-class Dog : public Animal {
-	bool bite{ false };
-
+class Dog : public Animal{
+	bool bite;
 public:
-	Dog() {
-		cout << "Dog의 기본생성자" << endl;
+	virtual void move() const override {		// 조상의 맴버를 overriding 함
+		cout << "개 - 달린다" << endl;
 	}
+};
 
-	Dog(int n) : Animal(n) {
-		cout << "Dog의 생성자" << endl;
-
-	}
-
-	~Dog() {
-		cout << "Dog의 소멸자" << endl;
+class Bird : public Animal {
+	long long fly;
+public:
+	virtual void move() const override final {
+		cout << "새 - 난다" << endl;
 	}
 };
 
@@ -59,21 +43,19 @@ public:
 int main()
 //--------
 {
-	// 부모와 자식간의 관계
-	Animal a;
+	// 다형성이라는 유연성을 구현하려면 메모리를 더 사용한다
+	// 핵심 키워드는 virtual
+
+	cout << "virtual 멤버가 있는 Dog의 크기 - " << sizeof(Dog) << endl;
+
 	Dog d;
+	Bird b;
 
-	// a = d;		// 언제나 성립 - Object slicing
-	// d = a;		// 성립 불가 -> 작은 메모리를 큰 메모리로 만들 방법은 없음
+	Animal* p = &d;
+	p->move();
 
-	// 그런데 이와 같이 객체를 직접 대입하는 문장은 실용성이 없음
-
-	Animal* pa = &a;
-	Dog* pd = &d;
-
-	// 조상의 *는 언제나 자식 객체를 pointing 할 수 있음 - dynamic_casting
-	pa = pd;		// up-casting은 언제나 성립, 상속계층도의 화살표 방향과 같음
-	//pd = pa;		// down-casting -> 조건부로 성립가능
+	p = &b;
+	p->move();
 
 	save("소스.cpp");
 }

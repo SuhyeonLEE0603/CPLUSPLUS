@@ -58,18 +58,8 @@ int main()
 		}
 	}
 
-	for (int i = 0; i < 10; ++i) {
-		if (uid(dre)) {
-			animals[i] = new Dog;
-		}
-		else {
-			animals[i] = new Bird;
-		}
+	for (Animal* p : animals) {
+		p->move();
 	}
-
-	for (int i = 0; i < 10; ++i) {
-		animals[i]->move();
-	}
-
-	//save("소스.cpp");
+	save("소스.cpp");
 }

@@ -37,29 +37,44 @@ public:
 	}
 };
 
-// [문제] 동물 10마리를 관리하는 코드를 만든다
-// 랜덤값에 따라 홀수면 Dog, 짝수면 Bird를 생성하라
-// 모든 동물의 move()를 호출하여 다형성이 구현됨을 확인하라
+// 다음시간 - 동적관리시스템
+// 
 
-default_random_engine dre;
+random_device rd;
+default_random_engine dre{ rd() };
 uniform_int_distribution uid{ 0, 1 };
 
 //--------
 int main()
 //--------
 {
-	Animal* animals[10];
-	for (Animal*& p : animals) {
-		if (uid(dre)) {
-			p = new Dog;
-		}
-		else {
-			p = new Bird;
-		}
-	}
-
-	for (Animal* p : animals) {
-		p->move();
-	}
 	save("소스.cpp");
+
+	while (true) {
+		cout << "몇 마리를 원하나요? ";
+		int num;
+		cin >> num;		// run-time에 결정
+
+		Animal** animals;
+		animals= new Animal * [num];		// run-time에 num이 결정되기 때문에 range for 문은 사용할 수 없음
+
+		for (int i = 0; i < num; ++i) {
+			if (uid(dre)) {
+				animals[i] = new Dog;
+			}
+			else {
+				animals[i] = new Bird;
+			}
+		}
+
+		for (int i = 0; i < num; ++i) {
+			animals[i]->move();
+		}
+
+		for (int i = 0; i < num; ++i) {
+			delete[] animals[i];
+		}
+
+		delete[] animals;
+	}
 }

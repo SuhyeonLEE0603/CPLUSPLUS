@@ -3669,6 +3669,9 @@ int main()
 		animals[i]->move();
 	}
 
+	for (Animal*& p : animals) {
+		delete p;
+	}
 	save("소스.cpp");
 }
 
@@ -3738,6 +3741,10 @@ int main()
 
 	for (Animal* p : animals) {
 		p->move();
+	}
+
+	for (Animal*& p : animals) {
+		delete p;
 	}
 	save("소스.cpp");
 }

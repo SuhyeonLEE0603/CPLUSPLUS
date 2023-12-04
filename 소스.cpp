@@ -8,6 +8,7 @@
 #include <iostream>
 #include "save.h"
 #include "STRING.h"
+
 using namespace std;
 
 // C++ 템플릿
@@ -32,9 +33,16 @@ public:
 
 };
 
-void change(int&, int&);
-void change(string&, string&);		// function overloading
-void change(Dog&, Dog&);
+// 소스 코드를 찍어낼 수 있도록 틀을 프로그래머가 제공한다
+// 템플릿 소스 코드는 자료형에 맞는 소스코드를 찍어내기 때문에 소스코드를 감출 수 없다
+// 템플릿은 반드시 선언과 정의를 동시에 한다
+template<class T>
+void change(T& a, T& b)
+{
+	T temp{ a };
+	a = b;
+	b = temp;
+}
 
 //--------
 int main()
@@ -42,7 +50,7 @@ int main()
 {
 	{
 		int a{ 1 }, b{ 2 };
-		change(a, b);
+		change<int>(a, b);
 		cout << a << ", " << b << endl;
 	}
 
@@ -59,25 +67,4 @@ int main()
 	}
 	save("소스.cpp");
 
-}
-
-void change(int& a, int& b)
-{
-	int temp{ a };
-	a = b;
-	b = temp;
-}
-
-void change(string& a, string& b) 
-{
-	string temp{ a };
-	a = b;
-	b = temp;
-}
-
-void change(Dog& a, Dog& b) 
-{
-	Dog temp{ a };
-	a = b;
-	b = temp;
 }

@@ -19,52 +19,38 @@ using namespace std;
 // 진짜 좋은 것은 무엇인가?
 
 // [문제] main을 수정하지 말고 의도대로 실행되게 해 주세요
-
+// 템플릿으로 해결해 주세요
 class Dog {
 	int num;
 public:
-	Dog(int n) : num{ n } {
+	Dog(int n) : num{n}{}
 
+	Dog operator+(const Dog & rhs) const {
+		return Dog(num + rhs.num);
 	}
 
-	friend ostream& operator<<(ostream& os, const Dog& a) {
-		return os << a.num;
+	friend ostream& operator<<(ostream& os, const Dog& d) {
+		return os << d.num;
 	}
-
 };
-
-// 소스 코드를 찍어낼 수 있도록 틀을 프로그래머가 제공한다
-// 템플릿 소스 코드는 자료형에 맞는 소스코드를 찍어내기 때문에 소스코드를 감출 수 없다
-// 템플릿은 반드시 선언과 정의를 동시에 한다
 template<class T>
-void change(T& a, T& b)
+T add(T a, T b)
 {
-	T temp{ a };
-	a = b;
-	b = temp;
+	return a + b;
+}
+template<>
+const char* add(const char* a, const char* b)
+{
+	return "탬플릿 특수화(specialization)";
 }
 
 //--------
 int main()
 //--------
 {
-	{
-		int a{ 1 }, b{ 2 };
-		change<int>(a, b);
-		cout << a << ", " << b << endl;
-	}
+	cout << add(1, 2) << endl;
+	cout << add("2023", "1204") << endl;
+	cout << add(Dog{ 1 }, Dog{ 2 }) << endl;
 
-	{
-		string a{ "2023" }, b{ "1204" };
-		change(a, b);
-		cout << a << ", " << b << endl;
-	}
-
-	{
-		Dog a{ 1 }, b{ 2 };
-		change(a, b);
-		cout << a << ", " << b << endl;
-	}
 	save("소스.cpp");
-
 }

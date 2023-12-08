@@ -6,6 +6,7 @@
 // 2023. 12. 18 월 - 성적게시
 //---------------------------------------------------------------------------
 #include <iostream>
+#include <algorithm>
 #include "save.h"
 #include "STRING.h"
 
@@ -16,41 +17,23 @@ using namespace std;
 //		같은 기능의 함수를 자료형만 바꿔 계속 만들어야 한다. -> 컴퓨터가 대신 하도록
 //		-> 템플릿 (소스 코드를 컴파일러가 생성할 수 있는 틀)
 // 뭐가 좋은가?
+//		소스코드를 생성해 주는 점
 // 진짜 좋은 것은 무엇인가?
-
-// [문제] main을 수정하지 말고 의도대로 실행되게 해 주세요
-// 템플릿으로 해결해 주세요
-class Dog {
-	int num;
-public:
-	Dog(int n) : num{n}{}
-
-	Dog operator+(const Dog & rhs) const {
-		return Dog(num + rhs.num);
-	}
-
-	friend ostream& operator<<(ostream& os, const Dog& d) {
-		return os << d.num;
-	}
-};
-template<class T>
-T add(T a, T b)
-{
-	return a + b;
-}
-template<>
-const char* add(const char* a, const char* b)
-{
-	return "탬플릿 특수화(specialization)";
-}
+//		함수를 호출하는 것보다 템플릿으로 만든 함수가 훨씬 빠를 수 있다는 것
 
 //--------
 int main()
 //--------
 {
-	cout << add(1, 2) << endl;
-	cout << add("2023", "1204") << endl;
-	cout << add(Dog{ 1 }, Dog{ 2 }) << endl;
+	int a[]{ 1, 3, 5, 7, 9, 2, 4, 6, 8, 10 };
+
+	// 인자 설명은 수요일
+	sort(begin(a), end(a), 호출가능타입(함수, 람다, 함수객체));
+
+	for (int n : a) {
+		cout << n << ' ';
+	}
+	cout << endl;
 
 	save("소스.cpp");
 }

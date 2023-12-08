@@ -9,7 +9,7 @@ public:
 	Rectangle();
 	Rectangle(const Point&, const Point&);
 	Rectangle(const Rectangle&);
-	~Rectangle();
+	virtual ~Rectangle() override;
 
 	virtual void draw() const override;
 };

@@ -18,7 +18,7 @@ public:
 
 	// 위 설명을 다음 줄과 같이 선언하여 대치할 수 있다
 	// Circle(const Circle&) = default;
-	~Circle();						// 소멸자를 프로그램할 필요가 없다는 것을 생각해 보자
+	virtual ~Circle() override;		// 소멸자를 프로그램할 필요가 없다는 것을 생각해 보자
 
 	virtual void draw() const override;
 };

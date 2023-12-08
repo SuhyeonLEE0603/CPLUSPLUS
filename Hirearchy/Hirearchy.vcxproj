@@ -133,6 +133,7 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeManager.h" />
+    <ClInclude Include="Star.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="ShapeManager.cpp" />
+    <ClCompile Include="Star.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="다형성구현.cpp" />
   </ItemGroup>

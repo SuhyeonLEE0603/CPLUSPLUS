@@ -1,0 +1,16 @@
+#include "Point.h"
+#include "Shape.h"
+
+class Star : public Shape
+{
+	Point p1, p2, p3, p4, p5;
+
+public:
+	Star();
+	Star(const Point&, const Point&, const Point&, const Point&, const Point&);
+	Star(const Star&);
+	virtual ~Star() override;
+
+	virtual void draw() const override;
+};
+

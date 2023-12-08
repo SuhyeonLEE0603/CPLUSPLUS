@@ -2,6 +2,7 @@
 #include "Triangle.h"
 #include "Circle.h"
 #include "Rectangle.h"
+#include "Star.h"
 #include "ShapeManager.h"
 
 //--------
@@ -28,6 +29,14 @@ int main()
 
 	// 이 프로그램에서 잘못된 점을 찾을 수 있는가?
 	// - Circle 생성시 반지름이 int 값으로 인자를 받고 있다
+	// - 각 도형의 소멸자가 호출되지 않음
 	// 잘못된 점을 어떻게 찾을 수 있는가?
 	// - 출력 콘솔 창에서 Circle의 반지름이 정수형으로 되어 있는 것을 확인할 수 있다
+	// - **로 Shape 배열을 가르키는 포인터만 해제되고 배열 안의 값들은 해제되지 않음
+
+	// 4. 더 많은 새 도형을 추가해 보며 프로그램의 동작을 이해해 보자.
+	// 다형성이 어떻게 구형되고 있는지 확인하자
+	sm.insert(new Star(Point(1, 1), Point(2, 2), Point(3, 3), Point(4, 4), Point(5, 5)));
+
+	sm.draw();
 }

@@ -9,7 +9,7 @@ public:
 	Triangle();
 	Triangle(const Point&, const Point&, const Point&);
 	Triangle(const Triangle&);
-	~Triangle();
+	virtual ~Triangle() override;
 
 	virtual void draw() const override;		// virtual function¿ª overriding
 };

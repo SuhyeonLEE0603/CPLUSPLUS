@@ -18,6 +18,7 @@ Triangle::Triangle(const Triangle& other)
 
 Triangle::~Triangle()
 {
+	std::cout << "»ï°¢Çü »èÁ¦µÊ" << '\n';
 }
 
 void Triangle::draw() const

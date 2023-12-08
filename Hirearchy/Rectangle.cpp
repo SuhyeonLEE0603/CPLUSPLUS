@@ -18,6 +18,7 @@ Rectangle::Rectangle(const Rectangle& other)
 
 Rectangle::~Rectangle()
 {
+	std::cout << "사각형 삭제됨" << '\n';
 }
 
 void Rectangle::draw() const

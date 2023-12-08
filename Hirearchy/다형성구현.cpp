@@ -3,6 +3,7 @@
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Star.h"
+#include "Hexahedron.h"
 #include "ShapeManager.h"
 
 //--------
@@ -25,7 +26,7 @@ int main()
 	}
 
 	// 3. 관리하고 있는 모든 도형을 그림
-	sm.draw();
+	//sm.draw();
 
 	// 이 프로그램에서 잘못된 점을 찾을 수 있는가?
 	// - Circle 생성시 반지름이 int 값으로 인자를 받고 있다
@@ -37,6 +38,13 @@ int main()
 	// 4. 더 많은 새 도형을 추가해 보며 프로그램의 동작을 이해해 보자.
 	// 다형성이 어떻게 구형되고 있는지 확인하자
 	sm.insert(new Star(Point(1, 1), Point(2, 2), Point(3, 3), Point(4, 4), Point(5, 5)));
-
+	Rectangle * rect = new Rectangle[6]{ Rectangle (Point(1, 1), Point(2, 2)),
+		Rectangle(Point(3, 3), Point(4, 4)),
+		Rectangle(Point(5, 5), Point(6, 6)),
+		Rectangle(Point(7, 7), Point(8, 8)),
+		Rectangle(Point(9, 9), Point(10, 10)),
+		Rectangle(Point(11, 11), Point(12, 12)) };
+	sm.insert(new Hexahedron(rect));
 	sm.draw();
+	delete[] rect;
 }

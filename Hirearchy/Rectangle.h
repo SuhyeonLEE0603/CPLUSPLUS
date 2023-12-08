@@ -1,6 +1,9 @@
 #include "Point.h"
 #include "Shape.h"
 
+#ifndef _Rectangle
+#define _Rectangle
+
 class Rectangle : public Shape
 {
 	Point p1, p2;
@@ -13,4 +16,9 @@ public:
 
 	virtual void draw() const override;
 };
+
+
+
+#endif // !_Rectangle
+
 

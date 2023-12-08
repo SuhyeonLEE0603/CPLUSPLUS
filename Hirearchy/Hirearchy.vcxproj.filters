@@ -36,6 +36,9 @@
     <ClInclude Include="Star.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Hexahedron.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Point.cpp">
@@ -57,6 +60,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Star.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Hexahedron.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

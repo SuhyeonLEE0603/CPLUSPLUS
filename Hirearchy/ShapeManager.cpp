@@ -38,7 +38,7 @@ void ShapeManager::draw() const
 	cout << "-------------------------------------------------" << '\n' << '\n';
 
 	for (int i = 0; i < nShape; ++i) {
-		cout << "[" << i << "]";
+		cout << "[" << i << "] ";
 		shapes[i]->draw();			// 다형성이 구현된다
 	}
 	cout << '\n';

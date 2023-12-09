@@ -12,7 +12,10 @@ public:
 	~ShapeManager();
 	ShapeManager(const ShapeManager&) = default;
 
+	int GetShapeNum();
 	void insert(Shape*);			// 도형을 추가하는 함수
+	void remove(int);
+	void remove_shape(int);
 	void draw() const;				// 전체 도형을 그리는 함수
 };
 

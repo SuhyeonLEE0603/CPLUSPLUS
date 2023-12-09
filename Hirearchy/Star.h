@@ -1,6 +1,9 @@
 #include "Point.h"
 #include "Shape.h"
 
+#ifndef _Star
+#define _Star
+
 class Star : public Shape
 {
 	Point p1, p2, p3, p4, p5;
@@ -13,4 +16,7 @@ public:
 
 	virtual void draw() const override;
 };
+
+
+#endif 
 

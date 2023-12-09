@@ -1,6 +1,9 @@
 #include "Point.h"				// Point를 Tirangle에서 사용
 #include "Shape.h"				// Shape을 상속 받음
 
+#ifndef _Triangle
+#define _Triangle
+
 class Triangle : public Shape
 {
 	Point p1, p2, p3;
@@ -13,4 +16,6 @@ public:
 
 	virtual void draw() const override;		// virtual function을 overriding
 };
+
+#endif
 

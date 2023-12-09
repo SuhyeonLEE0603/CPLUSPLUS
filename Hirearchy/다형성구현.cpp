@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "Point.h"
 #include "Triangle.h"
 #include "Circle.h"
@@ -6,6 +7,7 @@
 #include "Star.h"
 #include "Hexahedron.h"
 #include "ShapeManager.h"
+using namespace std;
 
 //--------
 int main()
@@ -64,217 +66,291 @@ int main()
 	// - 전체 도형을 그리기
 	// - 프로그램 끝내기
 
+	// 7. 메뉴에 항목을 추가하여 사용자가 선택한 도형을 제거할 수 있게 하자
+	// 관리하는 도형의 번호를 제거
+	// 선택한 클래스의 모든 도형을 제거
+
 	while (true) {
-		std::cout << "----------------------Memu----------------------" << '\n';
+		cout << "----------------------Memu----------------------" << '\n';
 		int n;
-		std::cout << "1. 원하는 도형 추가" << '\n';
-		std::cout << "2. 전체 도형을 그리기" << '\n';
-		std::cout << "3. 프로그램 끝내기" << '\n' << '\n';
-		std::cin >> n;
-		std::cout << '\n';
+		cout << "1. 원하는 도형 추가" << '\n';
+		cout << "2. 전체 도형을 그리기" << '\n';
+		cout << "3. 도형 제거하기" << '\n';
+		cout << "4. 프로그램 끝내기" << '\n' << '\n';
+		cin >> n;
+
+		if (cin.fail()) {
+			cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // 잘못된 입력 제거
+			cout << "잘못된 입력입니다. 정수를 입력하세요\n";
+			continue;
+		}
+		else if (n < 0 || n > 5) {
+			cout << "입력 범위가 잘못되었습니다. 1부터 5 사이의 정수를 입력하세요.\n";
+			continue;
+		}
 
 		switch (n)
 		{
+			Shape* shape;
 			int k;
 		case 1:
-			std::cout << '\t' << "1. 삼각형" << '\n';
-			std::cout << '\t' << "2. 사각형" << '\n';
-			std::cout << '\t' << "3. 원" << '\n';
-			std::cout << '\t' << "4. 별" << '\n';
-			std::cout << '\t' << "5. 육면체" << '\n';
-			std::cin >> k;
+			cout << "\t1. 삼각형" << '\n';
+			cout << "\t2. 사각형" << '\n';
+			cout << "\t3. 원" << '\n';
+			cout << "\t4. 별" << '\n';
+			cout << "\t5. 육면체" << '\n';
+			cin >> k;
+
+			if (cin.fail()) {
+				cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // 잘못된 입력 제거
+				cout << "잘못된 입력입니다. 정수를 입력하세요\n";
+				continue;
+			}
+			else if (k < 0 || k > 6) {
+				cout << "입력 범위가 잘못되었습니다. 1부터 5 사이의 정수를 입력하세요.\n";
+				continue;
+			}
+
 			switch (k)
 			{
-				Shape* shape;
 				double a, b;
 			case 1:
-				{
-					std::cout << "삼각형의 점의 위치를 입력하세요" << '\n';
+			{
+				cout << "삼각형의 점의 위치를 입력하세요" << '\n';
 
-					std::cout << "첫번째 점 : ";
-					std::cin >> a >> b;
-					Point p1(a, b);
+				cout << "첫번째 점 : ";
+				cin >> a >> b;
+				Point p1(a, b);
 
-					std::cout << "두번째 점 : ";
-					std::cin >> a >> b;
-					Point p2(a, b);
+				cout << "두번째 점 : ";
+				cin >> a >> b;
+				Point p2(a, b);
 
-					std::cout << "세번째 점 : ";
-					std::cin >> a >> b;
-					Point p3(a, b);
+				cout << "세번째 점 : ";
+				cin >> a >> b;
+				Point p3(a, b);
 
-					std::cout << "삼각형이 만들어졌습니다.";
-					shape = new Triangle(p1, p2, p3);
-					shape->draw();
+				cout << "삼각형이 만들어졌습니다.";
+				shape = new Triangle(p1, p2, p3);
+				shape->draw();
 
-					std::cout << "삼각형을 추가합니다." << '\n';
-					sm.insert(shape);
+				cout << "삼각형을 추가합니다." << '\n';
+				sm.insert(shape);
 
-					break;
-				}
+				break;
+
+			}
 			case 2:
-				{
-					std::cout << "사각형의 점의 위치를 입력하세요" << '\n';
+			{
+				cout << "사각형의 점의 위치를 입력하세요" << '\n';
 
-					std::cout << "첫번째 점 : ";
-					std::cin >> a >> b;
-					Point p1(a, b);
+				cout << "첫번째 점 : ";
+				cin >> a >> b;
+				Point p1(a, b);
 
-					std::cout << "두번째 점 : ";
-					std::cin >> a >> b;
-					Point p2(a, b);
+				cout << "두번째 점 : ";
+				cin >> a >> b;
+				Point p2(a, b);
 
-					std::cout << "사각형이 만들어졌습니다.";
-					shape = new Rectangle(p1, p2);
-					shape->draw();
+				cout << "사각형이 만들어졌습니다.";
+				shape = new Rectangle(p1, p2);
+				shape->draw();
 
-					std::cout << "사각형을 추가합니다." << '\n';
-					sm.insert(shape);
+				cout << "사각형을 추가합니다." << '\n';
+				sm.insert(shape);
 
-					break;
-				}
+				break;
+
+			}
 			case 3:
-				{
-					std::cout << "원의 중심점의 위치와 반지름을 입력하세요" << '\n';
+			{
+				cout << "원의 중심점의 위치와 반지름을 입력하세요" << '\n';
 
-					std::cout << "중심점 : ";
-					std::cin >> a >> b;
-					Point p1(a, b);
+				cout << "중심점 : ";
+				cin >> a >> b;
+				Point p1(a, b);
 
-					std::cout << "반지름 : ";
-					std::cin >> a;
+				cout << "반지름 : ";
+				cin >> a;
 
-					std::cout << "원이 만들어졌습니다.";
-					shape = new Circle(p1, a);
-					shape->draw();
+				cout << "원이 만들어졌습니다.";
+				shape = new Circle(p1, a);
+				shape->draw();
 
-					std::cout << "원을 추가합니다." << '\n';
-					sm.insert(shape);
+				cout << "원을 추가합니다." << '\n';
+				sm.insert(shape);
 
-					break;
-				}
+				break;
+
+			}
 			case 4:
-				{
-					std::cout << "별의 점의 위치를 입력하세요" << '\n';
+			{
+				cout << "별의 점의 위치를 입력하세요" << '\n';
 
-					std::cout << "첫번째 점 : ";
-					std::cin >> a >> b;
-					Point p1(a, b);
+				cout << "첫번째 점 : ";
+				cin >> a >> b;
+				Point p1(a, b);
 
-					std::cout << "두번째 점 : ";
-					std::cin >> a >> b;
-					Point p2(a, b);
+				cout << "두번째 점 : ";
+				cin >> a >> b;
+				Point p2(a, b);
 
-					std::cout << "세번째 점 : ";
-					std::cin >> a >> b;
-					Point p3(a, b);
+				cout << "세번째 점 : ";
+				cin >> a >> b;
+				Point p3(a, b);
 
-					std::cout << "네번째 점 : ";
-					std::cin >> a >> b;
-					Point p4(a, b);
+				cout << "네번째 점 : ";
+				cin >> a >> b;
+				Point p4(a, b);
 
-					std::cout << "다섯번째 점 : ";
-					std::cin >> a >> b;
-					Point p5(a, b);
+				cout << "다섯번째 점 : ";
+				cin >> a >> b;
+				Point p5(a, b);
 
-					std::cout << "별이 만들어졌습니다.";
-					shape = new Star(p1, p2, p3, p4, p5);
-					shape->draw();
+				cout << "별이 만들어졌습니다.";
+				shape = new Star(p1, p2, p3, p4, p5);
+				shape->draw();
 
-					std::cout << "별을 추가합니다." << '\n';
-					sm.insert(shape);
+				cout << "별을 추가합니다." << '\n';
+				sm.insert(shape);
 
-					break;
-				}
+				break;
+
+			}
 			case 5:
-				{
-					Point p1, p2;
-					Rectangle* rect = new Rectangle[6];
-					std::cout << "육면체의 사각형의 위치를 입력하세요" << '\n';
+			{
+				Point p1, p2;
+				Rectangle* rect = new Rectangle[6];
+				cout << "육면체의 사각형의 위치를 입력하세요" << '\n';
 
-					std::cout << "첫번째 사각형의 첫번째 점 : ";
-					std::cin >> a >> b;
-					p1.x = a;
-					p1.y = b;
+				cout << "첫번째 사각형의 첫번째 점 : ";
+				cin >> a >> b;
+				p1.x = a;
+				p1.y = b;
 
-					std::cout << "첫번째 사각형의 두번째 점 : ";
-					std::cin >> a >> b;
-					p2.x = a;
-					p2.y = b;
-					rect[0] = Rectangle(p1, p2);
+				cout << "첫번째 사각형의 두번째 점 : ";
+				cin >> a >> b;
+				p2.x = a;
+				p2.y = b;
+				rect[0] = Rectangle(p1, p2);
 
-					std::cout << "두번째 사각형의 첫번째 점 : ";
-					std::cin >> a >> b;
-					p1.x = a;
-					p1.y = b;
+				cout << "두번째 사각형의 첫번째 점 : ";
+				cin >> a >> b;
+				p1.x = a;
+				p1.y = b;
 
-					std::cout << "두번째 사각형의 두번째 점 : ";
-					std::cin >> a >> b;
-					p2.x = a;
-					p2.y = b;
-					rect[1] = Rectangle(p1, p2);
+				cout << "두번째 사각형의 두번째 점 : ";
+				cin >> a >> b;
+				p2.x = a;
+				p2.y = b;
+				rect[1] = Rectangle(p1, p2);
 
-					std::cout << "세번째 사각형의 첫번째 점 : ";
-					std::cin >> a >> b;
-					p1.x = a;
-					p1.y = b;
+				cout << "세번째 사각형의 첫번째 점 : ";
+				cin >> a >> b;
+				p1.x = a;
+				p1.y = b;
 
-					std::cout << "세번째 사각형의 두번째 점 : ";
-					std::cin >> a >> b;
-					p2.x = a;
-					p2.y = b;
-					rect[2] = Rectangle(p1, p2);
+				cout << "세번째 사각형의 두번째 점 : ";
+				cin >> a >> b;
+				p2.x = a;
+				p2.y = b;
+				rect[2] = Rectangle(p1, p2);
 
-					std::cout << "네번째 사각형의 첫번째 점 : ";
-					std::cin >> a >> b;
-					p1.x = a;
-					p1.y = b;
+				cout << "네번째 사각형의 첫번째 점 : ";
+				cin >> a >> b;
+				p1.x = a;
+				p1.y = b;
 
-					std::cout << "네번째 사각형의 두번째 점 : ";
-					std::cin >> a >> b;
-					p2.x = a;
-					p2.y = b;
-					rect[3] = Rectangle(p1, p2);
+				cout << "네번째 사각형의 두번째 점 : ";
+				cin >> a >> b;
+				p2.x = a;
+				p2.y = b;
+				rect[3] = Rectangle(p1, p2);
 
-					std::cout << "다섯번째 사각형의 첫번째 점 : ";
-					std::cin >> a >> b;
-					p1.x = a;
-					p1.y = b;
+				cout << "다섯번째 사각형의 첫번째 점 : ";
+				cin >> a >> b;
+				p1.x = a;
+				p1.y = b;
 
-					std::cout << "다섯번째 사각형의 두번째 점 : ";
-					std::cin >> a >> b;
-					p2.x = a;
-					p2.y = b;
-					rect[4] = Rectangle(p1, p2);
+				cout << "다섯번째 사각형의 두번째 점 : ";
+				cin >> a >> b;
+				p2.x = a;
+				p2.y = b;
+				rect[4] = Rectangle(p1, p2);
 
-					std::cout << "여섯번째 사각형의 첫번째 점 : ";
-					std::cin >> a >> b;
-					p1.x = a;
-					p1.y = b;
+				cout << "여섯번째 사각형의 첫번째 점 : ";
+				cin >> a >> b;
+				p1.x = a;
+				p1.y = b;
 
-					std::cout << "여섯번째 사각형의 두번째 점 : ";
-					std::cin >> a >> b;
-					p2.x = a;
-					p2.y = b;
-					rect[5] = Rectangle(p1, p2);
+				cout << "여섯번째 사각형의 두번째 점 : ";
+				cin >> a >> b;
+				p2.x = a;
+				p2.y = b;
+				rect[5] = Rectangle(p1, p2);
 
-					std::cout << "육면체가 만들어졌습니다.";
-					shape = new Hexahedron(rect);
-					shape->draw();
+				cout << "육면체가 만들어졌습니다.";
+				shape = new Hexahedron(rect);
+				shape->draw();
 
-					std::cout << "육면체를 추가합니다." << '\n';
-					sm.insert(shape);
+				cout << "육면체를 추가합니다." << '\n';
+				sm.insert(shape);
 
-					delete[] rect;
-					break;
-				}
+				delete[] rect;
+				break;
+
+			}
 			}
 			break;
+
 		case 2:
 			sm.draw();
 			break;
+
 		case 3:
-			std::cout << "프로그램을 종료합니다" << '\n';
+			cout << "\t1. 관리하는 도형 중 원하는 번호를 제거 \n";
+			cout << "\t2. 선택한 클래스의 모든 도형을 제거 \n";
+			cin >> k;
+
+			if (cin.fail()) {
+				cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // 잘못된 입력 제거
+				cout << "잘못된 입력입니다. 정수를 입력하세요\n";
+				continue;
+			}
+			else if (n < 0 || n > 3) {
+				cout << "입력 범위가 잘못되었습니다. 1부터 2 사이의 정수를 입력하세요.\n";
+				continue;
+			}
+
+			switch (k)
+			{
+				int n;
+			case 1:
+				cout << "\t 몇 번째 도형을 제거할까요? \n";
+				cin >> n;
+
+				sm.remove(n);
+				break;
+			case 2:
+				cout << "\t어떤 도형을 제거할까요?\n";
+				cout << "\t1. 삼각형" << '\n';
+				cout << "\t2. 사각형" << '\n';
+				cout << "\t3. 원" << '\n';
+				cout << "\t4. 별" << '\n';
+				cout << "\t5. 육면체" << '\n';
+				cin >> n;
+
+				sm.remove_shape(n);
+				break;
+
+			}
+			break;
+
+		case 4:
+			cout << "프로그램을 종료합니다" << '\n';
 			return 0;
 		}
 	}

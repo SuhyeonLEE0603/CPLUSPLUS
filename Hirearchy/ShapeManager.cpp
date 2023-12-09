@@ -1,4 +1,9 @@
 #include <iostream>
+#include "Circle.h"
+#include "Hexahedron.h"
+#include "Rectangle.h"
+#include "Star.h"
+#include "Triangle.h"
 #include "ShapeManager.h"
 using namespace std;
 
@@ -22,12 +27,138 @@ ShapeManager::~ShapeManager()
 	delete[] shapes;
 }
 
+int ShapeManager::GetShapeNum()
+{
+	return nShape;
+}
+
 //-------------------------------
 void ShapeManager::insert(Shape* a)
 //-------------------------------
 {
 	shapes[nShape] = a;
-	nShape++;
+	++nShape;
+}
+
+void ShapeManager::remove(int n)
+{
+	if (n < 0 || n > nShape) {
+		std::cout << "잘못된 인덱스입니다 \n";
+		return;
+	}
+
+	delete shapes[n];
+
+	std::cout << n << "번째 도형을 삭제합니다 \n";
+	for (int i = n; i < nShape; ++i) {
+		shapes[i] = shapes[i + 1];
+	}
+
+	--nShape;
+}
+
+void ShapeManager::remove_shape(int n)
+{
+	switch (n)
+	{	
+
+	case 1:
+		std::cout << "삼각형을 삭제합니다 \n";
+
+		for (int i = 0; i < nShape; ) {
+			if (dynamic_cast<Triangle*>(shapes[i])) {
+				delete shapes[i];
+
+				for (int j = i; j < nShape - 1; ++j) {
+					shapes[j] = shapes[j + 1];
+				}
+
+				--nShape;
+			}
+			else {
+				++i;
+			}
+		}
+		
+		break;
+
+	case 2:
+		std::cout << "사각형을 삭제합니다 \n";
+
+		for (int i = 0; i < nShape; ) {
+			if (dynamic_cast<Rectangle*>(shapes[i])) {
+				delete shapes[i];
+
+				for (int j = i; j < nShape - 1; ++j) {
+					shapes[j] = shapes[j + 1];
+				}
+
+				--nShape;
+			}
+			else {
+				++i;
+			}
+		}
+		break;
+
+	case 3:
+		std::cout << "원을 삭제합니다 \n";
+
+		for (int i = 0; i < nShape; ) {
+			if (dynamic_cast<Circle*>(shapes[i])) {
+				delete shapes[i];
+
+				for (int j = i; j < nShape - 1; ++j) {
+					shapes[j] = shapes[j + 1];
+				}
+
+				--nShape;
+			}
+			else {
+				++i;
+			}
+		}
+		break;
+
+	case 4:
+		std::cout << "별을 삭제합니다 \n";
+
+		for (int i = 0; i < nShape; ) {
+			if (dynamic_cast<Star*>(shapes[i])) {
+				delete shapes[i];
+
+				for (int j = i; j < nShape - 1; ++j) {
+					shapes[j] = shapes[j + 1];
+				}
+
+				--nShape;
+			}
+			else {
+				++i;
+			}
+		}
+		break;
+
+	case 5:
+		std::cout << "육면체를 삭제합니다 \n";
+
+		for (int i = 0; i < nShape; ) {
+			if (dynamic_cast<Hexahedron*>(shapes[i])) {
+				delete shapes[i];
+
+				for (int j = i; j < nShape - 1; ++j) {
+					shapes[j] = shapes[j + 1];
+				}
+
+				--nShape;
+			}
+			else {
+				++i;
+			}
+		}
+		break;
+
+	}
 }
 
 //-----------------------------

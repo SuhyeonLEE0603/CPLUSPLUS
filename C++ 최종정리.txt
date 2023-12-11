@@ -1,0 +1,63 @@
+C++
+
+Fundamental Data Type
+
+int n;		int -> ketword / int, n, ; : token
+
+sizeof (int);		}		{1. {int n;} STACK
+sizeof n;			} ->	{2. int n;	 DATA -> 초기화 하는 공간, 초기화 하지 않은 공간
+addressof(int)		}		{3. new int; Free Store
+								ㄴ int * p 로 정의하면 delete p로 해체해줘야함
+
+User Defined Data Type
+
+1. struct - 모든 member가 public일 경우, default public
+2. class - default private -> { 1. encapsulation
+							  {	2. inheritance
+							  {	3. polymorphism
+
+class X{
+
+private:
+	variable members;
+
+public:
+
+	- 6 special function
+	X();
+	~X();
+	X(const X&);
+	X& operator=(const X&);
+	X(X&&);	&& : r-value reference
+	X& operator=(X&&);
+	
+	operator overloading
+
+	member에 포인터가 있을 때, 객체가 포인팅 하고 있을 때 만 special function을 코딩하기에 합당함
+
+	getter() const;		} interface function (public에 있는 함수들은 다 interface function)
+	setter();			}
+};
+
+Operator Overloading
+
+lhs			operator		rhs
+operand		(+, -, *, /)	operand
+			(<<, >>)
+
+a + b -> { a.operator+(b);
+		 { operator+(a, b);
+		 { <<, >> friend 전역함수;
+
+Inheritance
+
+X a; -> instancing
+
+class X : public Y{};
+
+1. 코드 재활용
+2. 다형성 구현 - virtual : 생성되는 모든 객체마다 vtbl을 가리키는 vptr(8 bytes)
+
+{ memory -> contiguous
+{ time -> continuous
+trade-off 관계

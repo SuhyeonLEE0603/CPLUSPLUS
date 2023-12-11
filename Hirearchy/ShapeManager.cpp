@@ -36,8 +36,16 @@ int ShapeManager::GetShapeNum()
 void ShapeManager::insert(Shape* a)
 //-------------------------------
 {
-	shapes[nShape] = a;
-	++nShape;
+	if (nShape < capacity) {
+		shapes[nShape] = a;
+		++nShape;
+	}
+	else {
+		ShapeManager other(capacity * 2);
+		memcpy(&other.capacity, shapes, capacity);
+		other.
+	}
+	
 }
 
 void ShapeManager::remove(int n)
@@ -159,6 +167,12 @@ void ShapeManager::remove_shape(int n)
 		break;
 
 	}
+}
+
+void ShapeManager::reserve(int n)
+{
+	// 우선 동적 할당된 메모리를 다른 자리에 복사함
+
 }
 
 //-----------------------------

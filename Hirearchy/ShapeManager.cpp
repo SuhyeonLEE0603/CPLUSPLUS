@@ -41,9 +41,9 @@ void ShapeManager::insert(Shape* a)
 		++nShape;
 	}
 	else {
-		ShapeManager other(capacity * 2);
-		memcpy(&other.capacity, shapes, capacity);
-		other.
+		reserve();
+		shapes[nShape] = a;
+		++nShape;
 	}
 	
 }
@@ -169,10 +169,13 @@ void ShapeManager::remove_shape(int n)
 	}
 }
 
-void ShapeManager::reserve(int n)
+ShapeManager& ShapeManager::reserve()
 {
 	// 우선 동적 할당된 메모리를 다른 자리에 복사함
-
+	ShapeManager other(capacity * 2);
+	memcpy(&other.capacity, shapes, capacity);
+	other.nShape = nShape;
+	return other;
 }
 
 //-----------------------------
@@ -196,4 +199,12 @@ void ShapeManager::draw() const
 	cout << "-------------------------------------------------" << '\n' << '\n';
 
 
+}
+
+ostream& operator<<(ostream& os, const ShapeManager& sm)
+{
+	for (int i = 0; i < sm.nShape; ++i) {
+		sm.shapes[i]->print(os);
+	}
+	return os;
 }

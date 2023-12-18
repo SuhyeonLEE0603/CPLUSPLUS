@@ -22,9 +22,18 @@ Star::~Star()
 
 void Star::draw() const
 {
-	std::cout << "º° - (" << p1.x << ", " << p2.y << "), ("
-		<< p2.x << ", " << p2.y << "), ("
-		<< p3.x << ", " << p3.y << "), ("
-		<< p4.x << ", " << p4.y << "), ("
-		<< p5.x << ", " << p5.y << ")" << '\n';
+	std::cout << "º° - " << p1 << ", " << p2 << ", "
+		<< p3 << ", " << p4 << ", " << p5  << '\n';
+}
+
+void Star::print(std::ostream& os) const
+{
+	os << "º° - " << p1 << ", " << p2 << ", "
+		<< p3 << ", " << p4 << ", " << p5 << '\n';
+}
+
+std::ostream& operator<<(std::ostream& os, const Star& rect)
+{
+	rect.print(os);
+	return os;
 }

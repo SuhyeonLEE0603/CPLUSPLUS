@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <limits>
 #include "Point.h"
 #include "Triangle.h"
@@ -17,7 +18,7 @@ int main()
 	// 실습 순서대로 문제를 해결해 보자
 
 	// 1. 관리 클래스를 만듦
-	ShapeManager sm(100);				// 최대 100개의 도형을 관리함
+	ShapeManager sm(4);				// 최대 100개의 도형을 관리함
 
 	// 2. 도형들을 관리 클래스에 삽입함
 	//sm.insert(new Triangle());
@@ -73,13 +74,16 @@ int main()
 	// 8. 도형관리자가 관리할 수 있는 도형의 갯수가 꽉 찼다고 가정하자.
 	// 이런 경우에도 새로운 도형을 추가할 수 있도록 프로그램을 고쳐보자
 
+	// 9. 도형관리자가 관리하는 도형을 파일로 저장하고 읽어 오는 메뉴를 추가해 보자
 	while (true) {
 		cout << "----------------------Memu----------------------" << '\n';
 		int n;
 		cout << "1. 원하는 도형 추가" << '\n';
 		cout << "2. 전체 도형을 그리기" << '\n';
 		cout << "3. 도형 제거하기" << '\n';
-		cout << "4. 프로그램 끝내기" << '\n' << '\n';
+		cout << "4. 파일로 저장" << '\n';
+		cout << "5. 파일 불러오기" << '\n';
+		cout << "6. 프로그램 끝내기" << '\n' << '\n';
 		cin >> n;
 
 		if (cin.fail()) {
@@ -97,6 +101,9 @@ int main()
 		{
 			Shape* shape;
 			int k;
+			char buf[100];
+			ofstream out;
+
 		case 1:
 			cout << "\t1. 삼각형" << '\n';
 			cout << "\t2. 사각형" << '\n';
@@ -111,7 +118,7 @@ int main()
 				cout << "잘못된 입력입니다. 정수를 입력하세요\n";
 				continue;
 			}
-			else if (k < 0 || k > 6) {
+			else if (k < 0 || k > 7) {
 				cout << "입력 범위가 잘못되었습니다. 1부터 5 사이의 정수를 입력하세요.\n";
 				continue;
 			}
@@ -353,6 +360,26 @@ int main()
 			break;
 
 		case 4:
+			cout << "파일의 이름을 입력하세요 (.txt) \n";
+			cin >> buf;
+
+			if (cin.fail()) {
+				cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // 잘못된 입력 제거
+				cout << "잘못된 입력입니다. 문자를 입력하세요\n";
+				continue;
+			}
+
+			cout << buf << "에 저장합니다 \n";
+			out.open(buf, 'wb');
+
+			out << sm;
+
+			break;
+		case 5:
+
+
+		case 6:
 			cout << "프로그램을 종료합니다" << '\n';
 			return 0;
 		}

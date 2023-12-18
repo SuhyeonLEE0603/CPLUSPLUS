@@ -15,8 +15,10 @@ public:
 	virtual ~Rectangle() override;
 
 	virtual void draw() const override;
-};
+	virtual void print(std::ostream&) const override;
 
+	friend std::ostream& operator<<(std::ostream&, const Rectangle&);
+};
 
 
 #endif

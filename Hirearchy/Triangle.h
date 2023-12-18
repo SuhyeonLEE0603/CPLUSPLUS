@@ -14,6 +14,9 @@ public:
 	Triangle(const Triangle&);
 	virtual ~Triangle() override;
 
+	virtual void print(std::ostream&) const override;
+	friend std::ostream& operator<<(std::ostream&, const Triangle&);
+
 	virtual void draw() const override;		// virtual functionÀ» overriding
 };
 

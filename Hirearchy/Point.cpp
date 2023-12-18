@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Point.h"
 
 // 디폴트 생성자
@@ -10,4 +11,10 @@ Point::Point()
 // 인자 두 개를 받는 생성자
 Point::Point(double a, double b) : x(a), y(b)
 {
+}
+
+std::ostream& operator<<(std::ostream& os, const Point& p)
+{
+	os << "(" << p.x << ", " << p.y << ")";
+	return os;
 }

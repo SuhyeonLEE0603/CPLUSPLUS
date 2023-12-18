@@ -23,7 +23,18 @@ Triangle::~Triangle()
 
 void Triangle::draw() const
 {
-	std::cout << "»ï°¢Çü - (" << p1.x << ", " << p1.y << "), ("
-		<< p2.x << ", " << p2.y << "), ("
-		<< p3.x << ", " << p3.y << ")" << '\n';
+	std::cout << "»ï°¢Çü - " << p1 << ", "
+		<< p2 << ", " << p3  << '\n';
  }
+
+void Triangle::print(std::ostream& os) const
+{
+	os << "»ï°¢Çü - " << p1 << ", "
+		<< p2 << ", " << p3 << '\n';
+}
+
+std::ostream& operator<<(std::ostream& os, const Triangle& tri)
+{
+	tri.print(os);
+	return os;
+}

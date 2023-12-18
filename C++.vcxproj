@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="기말시험\MemoryMonster.cpp" />
+    <ClCompile Include="기말시험\Monster.cpp" />
+    <ClCompile Include="기말시험\ScreenMonster.cpp" />
+    <ClCompile Include="기말시험\TimeMonster.cpp" />
+    <ClCompile Include="기말시험\기말시험.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="기말시험\MemoryMonster.h" />
+    <ClInclude Include="기말시험\Monster.h" />
+    <ClInclude Include="기말시험\ScreenMonster.h" />
+    <ClInclude Include="기말시험\TimeMonster.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -128,15 +141,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="save.cpp" />
-    <ClCompile Include="STRING.cpp" />
-    <ClCompile Include="소스.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="save.h" />
-    <ClInclude Include="STRING.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

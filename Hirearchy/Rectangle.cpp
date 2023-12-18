@@ -23,6 +23,17 @@ Rectangle::~Rectangle()
 
 void Rectangle::draw() const
 {
-	std::cout << "사각형 - (" << p1.x << ", " << p1.y << "), ("
-		<< p2.x << ", " << p2.y << ")" << '\n';
+	std::cout << "사각형 - " << p1 
+		<< ", " << p2 << '\n';
+}
+
+void Rectangle::print(std::ostream& os) const
+{
+	os << "사각형 - " << p1 << ", " << p2 << '\n';
+}
+
+std::ostream& operator<<(std::ostream& os, const Rectangle& rect)
+{
+	rect.print(os);
+	return os;
 }

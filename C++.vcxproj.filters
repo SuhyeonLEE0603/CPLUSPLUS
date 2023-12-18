@@ -15,21 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="save.cpp">
+    <ClCompile Include="기말시험\MemoryMonster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="소스.cpp">
+    <ClCompile Include="기말시험\Monster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="STRING.cpp">
+    <ClCompile Include="기말시험\ScreenMonster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="기말시험\TimeMonster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="기말시험\기말시험.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="save.h">
+    <ClInclude Include="기말시험\MemoryMonster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="STRING.h">
+    <ClInclude Include="기말시험\Monster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="기말시험\ScreenMonster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="기말시험\TimeMonster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

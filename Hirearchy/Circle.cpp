@@ -28,6 +28,18 @@ Circle::~Circle()
 void Circle::draw() const
 {
 	// 그림을 그리는 대신 문자로 정보를 출력한다
-	std::cout << "원 - 중심점(" << center.x << ", " << center.y
-		<< ") 반지름 - " << rad << '\n';
+	std::cout << "원 - 중심점 " << center
+		<< " 반지름 - " << rad << '\n';
+}
+
+void Circle::print(std::ostream& os) const
+{
+	os << "원 - 중심점 " << center
+		<< " 반지름 - " << rad << '\n';
+}
+
+std::ostream& operator<<(std::ostream& os, const Circle& circle)
+{
+	circle.print(os);
+	return os;
 }
